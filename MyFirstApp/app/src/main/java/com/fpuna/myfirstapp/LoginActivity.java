@@ -3,27 +3,22 @@ package com.fpuna.myfirstapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
+import com.fpuna.myfirstapp.vista.VistaHijosActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
@@ -50,9 +45,12 @@ public class LoginActivity extends AppCompatActivity implements
 
         // Button listeners
         (findViewById(R.id.sign_in_button)).setOnClickListener(this);
+        (findViewById(R.id.continue_button)).setOnClickListener(this);
+        /*
         (findViewById(R.id.sign_out_button)).setOnClickListener(this);
         (findViewById(R.id.sign_out_and_disconnect)).setOnClickListener(this);
         (findViewById(R.id.next_button)).setOnClickListener(this);
+        */
 
 
         // [START configure_signin]
@@ -116,14 +114,16 @@ public class LoginActivity extends AppCompatActivity implements
     private void updateUI(boolean signedIn) {
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-            findViewById(R.id.next_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.continue_button).setVisibility(View.VISIBLE);
+            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            //findViewById(R.id.next_button).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-            findViewById(R.id.next_button).setVisibility(View.GONE);
+            findViewById(R.id.continue_button).setVisibility(View.GONE);
+            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            //findViewById(R.id.next_button).setVisibility(View.GONE);
         }
     }
 
@@ -193,6 +193,11 @@ public class LoginActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void goToVistaHijosActivity(){
+        Intent intent = new Intent(this, VistaHijosActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         Log.d(TAG, "onClick");
@@ -201,14 +206,16 @@ public class LoginActivity extends AppCompatActivity implements
                 signIn();
                 break;
 
+/*
             case R.id.sign_out_button:
                 signOut();
                 break;
             case R.id.disconnect_button:
                 revokeAccess();
                 break;
-            case R.id.next_button:
-                goToMainActivity();
+                */
+            case R.id.continue_button:
+                goToVistaHijosActivity();
                 break;
 
         }

@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayMessageActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".vista.VistaHijosActivity"></activity>
     </application>
 
 </manifest>

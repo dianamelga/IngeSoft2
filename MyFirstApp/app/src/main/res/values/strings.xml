@@ -1,15 +1,24 @@
 <resources>
-    <string name="app_name">My First App</string>
+    <string name="app_name">My fist App</string>
     <string name="hint_nombre">Nombre</string>
     <string name="button_send">Enviar</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="loading">Loading…</string>
     <string name="desc_google_icon">Google Logo</string>
     <string name="server_client_id"> 280982687583-9onsdjm31fs2h75474i6l8flrevlj8er.apps.googleusercontent.com </string>
-    <string name="title_text">Google Sign-In</string>
+    <string name="title_text">Agenda Pediátrica</string>
     <string name="signed_out">Signed Out</string>
     <string name="sign_out">Sign Out</string>
     <string name="disconnect">Disconnect</string>
     <string name="nextbutton">Next</string>
     <string name="nextbutton_text">GO</string>
+    <string name="text_button_continue">Continuar</string>
+    <string name="title_vista_hijos">Hijos/as</string>
+    <string name="label_nombre">Nombre</string>
+    <string name="label_edad">Edad</string>
+    <string name="label_sexo">Sexo</string>
+    <string name="nombre_hijo">Diana Melgarejo</string>
+    <string name="value_edad">21</string>
+    <string name="value_sexo">Femenino</string>
+    <string name="toolbar_title_vistaHijos">Hijos/as</string>
 </resources>
