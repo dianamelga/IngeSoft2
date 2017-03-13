@@ -31,6 +31,7 @@ public class Hijo {
 
     }
 
+
     public Hijo(String id, String nombre, String apellido, String ci, String fecha_nacimiento, String sexo) {
         this.id = id;
         this.nombre = nombre;
