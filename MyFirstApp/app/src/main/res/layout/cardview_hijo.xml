@@ -64,6 +64,20 @@
                     android:text="@string/value_sexo"/>
             </LinearLayout>
         </LinearLayout>
+       <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+           <Button
+               android:id="@+id/button_detalle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Detalle"
+               android:layout_gravity="right"
+               />
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
+import com.fpuna.myfirstapp.vista.VacunasActivity;
 import com.fpuna.myfirstapp.vista.VistaHijosActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -195,6 +195,11 @@ public class LoginActivity extends AppCompatActivity implements
 
     public void goToVistaHijosActivity(){
         Intent intent = new Intent(this, VistaHijosActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToVacunasActivity(){
+        Intent intent = new Intent(this, VacunasActivity.class);
         startActivity(intent);
     }
 

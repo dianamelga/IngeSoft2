@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".DisplayMessageActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".vista.VistaHijosActivity"></activity>
+        <activity android:name=".vista.VistaHijosActivity" />
+        <activity android:name=".vista.VacunasActivity"></activity>
     </application>
 
 </manifest>

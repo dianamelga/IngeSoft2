@@ -1,5 +1,6 @@
 package com.fpuna.myfirstapp.vista;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,8 @@ import android.util.Log;
 
 import com.fpuna.myfirstapp.adapter.HijosAdapter;
 import com.fpuna.myfirstapp.R;
+import com.fpuna.myfirstapp.modelo.AgendaPediatrica;
 import com.fpuna.myfirstapp.modelo.AgendaPediatricaContract;
-import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
 import com.fpuna.myfirstapp.modelo.Hijo;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class VistaHijosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_hijos);
+
+        Log.d(TAG, "vistaHijosActivity");
 
         showToolbar(getResources().getString(R.string.toolbar_title_vistaHijos),
                 false);
@@ -43,6 +46,8 @@ public class VistaHijosActivity extends AppCompatActivity {
 
         hijosRecycler.setAdapter(hijosAdapterRecyclerView);
 
+
+
     }
 
     public void showToolbar(String title, boolean upButton){
@@ -59,20 +64,22 @@ public class VistaHijosActivity extends AppCompatActivity {
         Log.d(TAG,"buildHijos");
 
         ArrayList<Hijo> hijos = new ArrayList<>();
-        AgendaPediatricaDbHelper apDbHelper = new AgendaPediatricaDbHelper(this);
+        AgendaPediatrica apDbHelper = new AgendaPediatrica(this);
 
         SQLiteDatabase db = apDbHelper.getReadableDatabase();
 
         String[] projection = {
                 AgendaPediatricaContract.HijosEntry._ID,
                 AgendaPediatricaContract.HijosEntry.CI,
-                AgendaPediatricaContract.HijosEntry.NOMBRE,
-                AgendaPediatricaContract.HijosEntry.APELLIDO,
+                AgendaPediatricaContract.HijosEntry.NOMBRES,
+                AgendaPediatricaContract.HijosEntry.APELLIDOS,
                 AgendaPediatricaContract.HijosEntry.SEXO,
-                AgendaPediatricaContract.HijosEntry.FECHA_NACIMIENTO
+                AgendaPediatricaContract.HijosEntry.FECHA_NACIMIENTO,
+                AgendaPediatricaContract.HijosEntry.ID_PADRE
         };
-
-        String selection = AgendaPediatricaContract.HijosEntry.NOMBRE + " = ?";
+/*
+        String selection = AgendaPediatricaContract.HijosEntry.NOMBRES + " = ?";
+        */
         String[] selectionArgs = {"My Title" };
 
         String sortOrder =
@@ -81,7 +88,7 @@ public class VistaHijosActivity extends AppCompatActivity {
         Cursor c = db.query(
                 AgendaPediatricaContract.HijosEntry.TABLE_NAME,
                 projection,
-                selection,
+                null,/*selection*/
                 selectionArgs,
                 null,
                 null,
@@ -122,6 +129,13 @@ public class VistaHijosActivity extends AppCompatActivity {
 
         return hijos;
     }
+
+    public void goToVacunasActivity(){
+        Intent intent = new Intent(this, VacunasActivity.class);
+        startActivity(intent);
+
+    }
+
 
 
 }

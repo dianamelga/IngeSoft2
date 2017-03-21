@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fpuna.myfirstapp.vista.VacunasActivity"
+
+   >
+
+
+    <TableRow
+        android:id="@+id/tabla_cabecera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TableLayout
+        android:id="@+id/tabla_cuerpo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/vacuna1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
+            android:padding="5dp"
+            android:text="Vacuna"
+            android:textColor="@android:color/black"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edad1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="Edad"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+            <TextView
+                android:id="@+id/fecha1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="Fecha"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+            <TextView
+                android:id="@+id/lote1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="Lote"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+            <TextView
+                android:id="@+id/responsable1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="Responsable"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vacuna2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edad2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/fecha2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/lote2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/responsable2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vacuna3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edad3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/fecha3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/lote3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/responsable3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vacuna4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edad4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/fecha4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/lote4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/responsable4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vacuna5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edad5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/fecha5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/lote5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/responsable5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        </TableLayout>
+
+</RelativeLayout>

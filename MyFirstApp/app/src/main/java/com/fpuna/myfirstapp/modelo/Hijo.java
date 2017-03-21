@@ -117,8 +117,8 @@ public class Hijo {
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(AgendaPediatricaContract.HijosEntry.ID, id);
-        values.put(AgendaPediatricaContract.HijosEntry.NOMBRE, nombre);
-        values.put(AgendaPediatricaContract.HijosEntry.APELLIDO, apellido);
+        values.put(AgendaPediatricaContract.HijosEntry.NOMBRES, nombre);
+        values.put(AgendaPediatricaContract.HijosEntry.APELLIDOS, apellido);
         values.put(AgendaPediatricaContract.HijosEntry.SEXO, sexo);
         values.put(AgendaPediatricaContract.HijosEntry.CI, ci);
         values.put(AgendaPediatricaContract.HijosEntry.FECHA_NACIMIENTO, fecha_nacimiento);
