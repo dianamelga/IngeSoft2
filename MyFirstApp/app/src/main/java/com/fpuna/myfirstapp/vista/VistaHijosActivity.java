@@ -10,10 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.fpuna.myfirstapp.adapter.HijosAdapter;
+import com.fpuna.myfirstapp.adapter.HijosRecyclerViewAdapter;
 import com.fpuna.myfirstapp.R;
-import com.fpuna.myfirstapp.modelo.AgendaPediatrica;
-import com.fpuna.myfirstapp.modelo.AgendaPediatricaContract;
+import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
+import com.fpuna.myfirstapp.modelo.AgendaPediatricaContract.*;
 import com.fpuna.myfirstapp.modelo.Hijo;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class VistaHijosActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
+    private ArrayList<Hijo> hijos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class VistaHijosActivity extends AppCompatActivity {
 
         RecyclerView hijosRecycler = (RecyclerView) findViewById(R.id.hijo_recycler);
 
+        hijos = buildHijos();
         /*darle forma*/
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -41,8 +43,8 @@ public class VistaHijosActivity extends AppCompatActivity {
 
         hijosRecycler.setLayoutManager(linearLayoutManager);
 
-        HijosAdapter hijosAdapterRecyclerView = new HijosAdapter(
-                buildHijos(),R.layout.cardview_hijo,this);
+        HijosRecyclerViewAdapter hijosAdapterRecyclerView = new HijosRecyclerViewAdapter(
+                hijos,R.layout.cardview_hijo,this);
 
         hijosRecycler.setAdapter(hijosAdapterRecyclerView);
 
@@ -64,71 +66,28 @@ public class VistaHijosActivity extends AppCompatActivity {
         Log.d(TAG,"buildHijos");
 
         ArrayList<Hijo> hijos = new ArrayList<>();
-        AgendaPediatrica apDbHelper = new AgendaPediatrica(this);
+        AgendaPediatricaDbHelper apDbHelper = new AgendaPediatricaDbHelper(this);
 
         SQLiteDatabase db = apDbHelper.getReadableDatabase();
 
-        String[] projection = {
-                AgendaPediatricaContract.HijosEntry._ID,
-                AgendaPediatricaContract.HijosEntry.CI,
-                AgendaPediatricaContract.HijosEntry.NOMBRES,
-                AgendaPediatricaContract.HijosEntry.APELLIDOS,
-                AgendaPediatricaContract.HijosEntry.SEXO,
-                AgendaPediatricaContract.HijosEntry.FECHA_NACIMIENTO,
-                AgendaPediatricaContract.HijosEntry.ID_PADRE
-        };
-/*
-        String selection = AgendaPediatricaContract.HijosEntry.NOMBRES + " = ?";
-        */
-        String[] selectionArgs = {"My Title" };
+        Cursor hijosCursor = apDbHelper.getAllHijos();
 
-        String sortOrder =
-                AgendaPediatricaContract.HijosEntry._ID + " DESC";
-
-        Cursor c = db.query(
-                AgendaPediatricaContract.HijosEntry.TABLE_NAME,
-                projection,
-                null,/*selection*/
-                selectionArgs,
-                null,
-                null,
-                sortOrder);
-
-
-        Log.d(TAG,"Hay datos en la BD? " + String.valueOf(c.moveToFirst()));
-
-        if (c.moveToFirst()) {
-            Log.d(TAG, "toma datos de la BD");
-            do {
-                hijos.add(new Hijo(c.getString(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getString(4),
-                        c.getString(5)));
-
-            }while(c.moveToNext());
-        }else{
-            Log.d(TAG,"Carga datos...");
-            /*cargo datos*/
-            hijos.add(new Hijo("1","Diana","Melgarejo", "4484526","25-05-1995","Femenino"));
-            hijos.add(new Hijo("2","Diana","Melgarejo", "4484526","25-05-1995","Femenino"));
-            hijos.add(new Hijo("3","Diana","Melgarejo", "4484526","25-05-1995","Femenino"));
-            hijos.add(new Hijo("4","Diana","Melgarejo", "4484526","25-05-1995","Femenino"));
-
-            try {
-
-                for (int i=0; i<hijos.size(); i++){
-                    apDbHelper.saveHijo(hijos.get(i));
-                }
-            }catch(Exception e){
-                e.printStackTrace();
+        if (hijosCursor != null &&  hijosCursor.getCount() > 0) {
+            while (hijosCursor.moveToNext()){
+                hijos.add(new Hijo(Integer.valueOf(hijosCursor.getString(0)),
+                        Integer.valueOf(hijosCursor.getString(1)),
+                        hijosCursor.getString(2),
+                        hijosCursor.getString(3),
+                        hijosCursor.getString(4),
+                        hijosCursor.getString(5),
+                        hijosCursor.getString(6)));
+                Log.d(TAG,"Creando array...");
             }
-
         }
 
         return hijos;
     }
+
 
     public void goToVacunasActivity(){
         Intent intent = new Intent(this, VacunasActivity.class);

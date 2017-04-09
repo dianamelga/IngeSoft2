@@ -2,10 +2,6 @@ package com.fpuna.myfirstapp.adapter;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +17,14 @@ import java.util.ArrayList;
  * Created by diana on 10/03/17.
  */
 
-public class HijosAdapter extends RecyclerView.Adapter<HijosAdapter.HijosViewHolder> {
+public class HijosRecyclerViewAdapter extends RecyclerView.Adapter<HijosRecyclerViewAdapter.HijosViewHolder> {
 
     private ArrayList<Hijo> hijos;
     private int resource;/*recurso o cardview layout*/
     private Activity activity;
-    private Cursor items;
 
-    public HijosAdapter(ArrayList<Hijo> hijos, int resource, Activity activity) {
+
+    public HijosRecyclerViewAdapter(ArrayList<Hijo> hijos, int resource, Activity activity) {
         this.hijos = hijos;
         this.resource = resource; /*cardview.xml*/
         this.activity = activity;
@@ -60,16 +56,6 @@ public class HijosAdapter extends RecyclerView.Adapter<HijosAdapter.HijosViewHol
         return hijos.size();
     }
 
-    public void swapCursor(Cursor nuevoCursor) {
-        if (nuevoCursor != null) {
-            items = nuevoCursor;
-            notifyDataSetChanged();
-        }
-    }
-
-    public Cursor getCursor() {
-        return items;
-    }
 
     public class HijosViewHolder extends RecyclerView.ViewHolder{
         /* todos los views que componen al cardview*/

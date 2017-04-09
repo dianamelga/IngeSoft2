@@ -1,21 +1,12 @@
 package com.fpuna.myfirstapp.vista;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.fpuna.myfirstapp.R;
-import com.fpuna.myfirstapp.modelo.AgendaPediatrica;
-import com.fpuna.myfirstapp.modelo.AgendaPediatricaContract;
-import com.fpuna.myfirstapp.modelo.Hijo;
 
 public class VacunasActivity extends AppCompatActivity {
 
@@ -82,7 +73,7 @@ public class VacunasActivity extends AppCompatActivity {
 
 
 /*
-        AgendaPediatrica apDbHelper = new AgendaPediatrica(this);
+        AgendaPediatricaDbHelper apDbHelper = new AgendaPediatricaDbHelper(this);
 
         SQLiteDatabase db = apDbHelper.getWritableDatabase();
 
