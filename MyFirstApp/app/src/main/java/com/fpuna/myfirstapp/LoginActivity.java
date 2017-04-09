@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.Status;
 
 
 public class LoginActivity extends AppCompatActivity implements
+
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
     private static final String TAG = "SignInActivity";
