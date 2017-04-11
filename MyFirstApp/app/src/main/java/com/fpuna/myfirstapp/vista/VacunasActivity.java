@@ -86,7 +86,6 @@ public class VacunasActivity extends AppCompatActivity {
             }
             cHIjo.close();
             return  mArrayList;
-
         }
     }
 
