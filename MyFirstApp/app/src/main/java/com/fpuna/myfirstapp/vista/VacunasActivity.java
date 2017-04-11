@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.fpuna.myfirstapp.R;
 import com.fpuna.myfirstapp.Utiles;
@@ -21,6 +19,10 @@ import java.util.List;
 import com.fpuna.myfirstapp.modelo.ExpandableListAdapter;
 
 public class VacunasActivity extends AppCompatActivity {
+    /**************************************************************************
+     *  GUARDO PARA NO PERDER, NO USO ESTA CLASE
+     *  **********************************************************************/
+
     private static final String ARG_HIJO_ID = "hijoId";
     private int mHijoId;
     private AgendaPediatricaDbHelper apDBHelper;
@@ -30,15 +32,15 @@ public class VacunasActivity extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<Vacuna>> listDataChild;
 
-    public VacunasActivity(int hijoId){
-        this.mHijoId = hijoId;
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacunas);
+
+        //mHijoId = Integer.valueOf(getIntent().getExtras().getString(ARG_HIJO_ID));
+
 
 
         showToolbar(getResources().getString(R.string.toolbar_title_vistaVacunas),

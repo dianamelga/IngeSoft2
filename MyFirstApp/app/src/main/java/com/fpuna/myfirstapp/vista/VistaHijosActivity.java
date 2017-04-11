@@ -5,15 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.fpuna.myfirstapp.adapter.HijosRecyclerViewAdapter;
 import com.fpuna.myfirstapp.R;
 import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
-import com.fpuna.myfirstapp.modelo.AgendaPediatricaContract.*;
 import com.fpuna.myfirstapp.modelo.Hijo;
 
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class VistaHijosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_hijos);
 
+
         Log.d(TAG, "vistaHijosActivity");
+
 
         showToolbar(getResources().getString(R.string.toolbar_title_vistaHijos),
                 false);
@@ -36,6 +40,8 @@ public class VistaHijosActivity extends AppCompatActivity {
         RecyclerView hijosRecycler = (RecyclerView) findViewById(R.id.hijo_recycler);
 
         hijos = buildHijos();
+
+
         /*darle forma*/
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -47,8 +53,6 @@ public class VistaHijosActivity extends AppCompatActivity {
                 hijos,R.layout.cardview_hijo,this);
 
         hijosRecycler.setAdapter(hijosAdapterRecyclerView);
-
-
 
     }
 
@@ -89,11 +93,7 @@ public class VistaHijosActivity extends AppCompatActivity {
     }
 
 
-    public void goToVacunasActivity(){
-        Intent intent = new Intent(this, VacunasActivity.class);
-        startActivity(intent);
 
-    }
 
 
 
