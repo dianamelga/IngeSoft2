@@ -68,7 +68,8 @@ public class VacunasActivity extends AppCompatActivity {
         @Override
         protected ArrayList<Vacuna> doInBackground(String... par) {
             Cursor cursor = apDBHelper.getVacunasByMes(par[0], par[1]);
-            Cursor cHIjo = apDBHelper.getHijoById(String.valueOf(mHijoId));
+            Cursor cHIjo = apDBHelper.getAllHijos();
+            //Cursor cHIjo = apDBHelper.getHijoById(String.valueOf(mHijoId));
             cHIjo.moveToFirst();
             Hijo hijo = new Hijo(cHIjo);
             String fecha;
