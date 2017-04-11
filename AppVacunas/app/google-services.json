@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1025672760758",
+    "project_id": "firebase-appvacunas"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025672760758:android:d6915a4226cc1cc6",
+        "android_client_info": {
+          "package_name": "vacunas.app.com.appvacunas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025672760758-lullkvan8tq81gbomh23r3el0lppqkd7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vacunas.app.com.appvacunas",
+            "certificate_hash": "f75b2c7af296cfc71e18bb912bcea498e83515e8"
+          }
+        },
+        {
+          "client_id": "1025672760758-0f0le0j4ttilhq3q4ssfngmteiudpbiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlAC5GW-MuZvuytlqLc9Ra3tWNFM5csM0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
