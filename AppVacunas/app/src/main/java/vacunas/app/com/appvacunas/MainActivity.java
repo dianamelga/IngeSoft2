@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements
   }
 
   public void goToVacunasActivity(){
-    Intent intent = new Intent(this, VacunasActivity.class);
+    Intent intent = new Intent(this, HijosActivity.class);
     startActivity(intent);
   }
 
