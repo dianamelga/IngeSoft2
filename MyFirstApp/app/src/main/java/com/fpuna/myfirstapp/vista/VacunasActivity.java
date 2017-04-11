@@ -19,9 +19,6 @@ import java.util.List;
 import com.fpuna.myfirstapp.modelo.ExpandableListAdapter;
 
 public class VacunasActivity extends AppCompatActivity {
-    /**************************************************************************
-     *  GUARDO PARA NO PERDER, NO USO ESTA CLASE
-     *  **********************************************************************/
 
     private static final String ARG_HIJO_ID = "hijoId";
     private int mHijoId;
