@@ -22,4 +22,6 @@
     <string name="value_sexo">Femenino</string>
     <string name="toolbar_title_vistaHijos">Hijos/as</string>
     <string name="toolbar_title_vistaVacunas">Vacunas</string>
+    <string name="label_id">Id Hijo</string>
+    <string name="value_id_hijo">007</string>
 </resources>
