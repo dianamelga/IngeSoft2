@@ -1,0 +1,158 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_marginLeft="72dp"
+  android:layout_marginRight="@dimen/activity_horizontal_margin"
+  android:orientation="vertical">
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Cédula"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_cedula"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text="1111111" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Fecha Nacimiento"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_fecha_nac"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text="01/01/1991" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Sexo"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_sexo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text="Femenino" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Lugar de Nacimiento"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_lugar_nac"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Nacionalidad"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_nac"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Departamento"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_departamento"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Municipio"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_municipio"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Barrio"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_barrio"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Dirección"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_direccion"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:text="Alergias"
+    android:textColor="?colorPrimary" />
+
+  <TextView
+    android:id="@+id/tv_alergia"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    tools:text=" " />
+</LinearLayout>
