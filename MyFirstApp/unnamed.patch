@@ -1,0 +1,27 @@
+Index: MyFirstApp/app/src/main/java/com/fpuna/myfirstapp/vista/VacunasActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- MyFirstApp/app/src/main/java/com/fpuna/myfirstapp/vista/VacunasActivity.java	(date 1491880682000)
++++ MyFirstApp/app/src/main/java/com/fpuna/myfirstapp/vista/VacunasActivity.java	(revision )
+@@ -7,7 +7,6 @@
+ import android.support.v7.widget.Toolbar;
+ import android.widget.ExpandableListView;
+ 
+-import com.fpuna.myfirstapp.R;
+ import com.fpuna.myfirstapp.Utiles;
+ import com.fpuna.myfirstapp.modelo.AgendaPediatricaDbHelper;
+ import com.fpuna.myfirstapp.modelo.Hijo;
+@@ -18,10 +17,8 @@
+ import java.util.List;
+ import com.fpuna.myfirstapp.modelo.ExpandableListAdapter;
+ 
++
+ public class VacunasActivity extends AppCompatActivity {
+-    /**************************************************************************
+-     *  GUARDO PARA NO PERDER, NO USO ESTA CLASE
+-     *  **********************************************************************/
+ 
+     private static final String ARG_HIJO_ID = "hijoId";
+     private int mHijoId;
