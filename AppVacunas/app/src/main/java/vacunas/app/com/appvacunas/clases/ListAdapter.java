@@ -85,13 +85,15 @@ public class ListAdapter extends BaseExpandableListAdapter {
     txtListChild.setText("Responsable: " + vacuna.getResponsable());
 
     ImageView imgListChild = (ImageView) convertView.findViewById(R.id.iv_vacunas);
-    Calculador ut = new Calculador();
+    Calculador calc = new Calculador();
     if(vacuna.getAplicado() == 1) {
       imgListChild.setImageResource(R.drawable.check_ok);
     }
-    //TODO: else if (ut.vencido()){
+    else if (calc.vencido(vacuna.getFecha_apl(), vacuna.getMes_aplicacion())){
+      imgListChild.setImageResource(R.drawable.no_check);
+    }
     // imgListChild.setImageResource(R.drawable.no_check);}
-    else if (ut.enTiempo(vacuna.getFecha_apl())) {
+    else if (calc.enTiempo(vacuna.getFecha_apl())) {
       imgListChild.setImageResource(R.drawable.no_yet_orange);
     }
     else {
