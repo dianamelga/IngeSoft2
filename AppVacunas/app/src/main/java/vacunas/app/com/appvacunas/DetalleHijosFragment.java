@@ -1,11 +1,12 @@
 package vacunas.app.com.appvacunas;
 
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import vacunas.app.com.appvacunas.data.BDHelper;
  * Created by adriana on 9/4/2017.
  */
 
-public class DetalleHijosFragment extends Fragment{
+public class DetalleHijosFragment extends Fragment {
   private static final String ARG_HIJO_ID = "hijoId";
   private int mHijoId;
 
