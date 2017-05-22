@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/java/com/servervacunas/Usuarios.java</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/java/com/servervacunas/service/AbstracPortada.java</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/web/index.html</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/java/com/servervacunas/service/ApplicationConfig.java</file>
-            <file>file:/C:/Users/adriana/Desktop/DQ-Vaccine-master/ServerVacunas/src/java/com/servervacunas/service/UsuariosPortadaREST.java</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/src/java/com/servervacunas/Hijo.java</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/src/java/com/servervacunas/service/UsuariosFacadeREST.java</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/src/java/com/servervacunas/service/AbstractFacade.java</file>
+            <file>file:/C:/Users/adriana/IngeSoft2/ServerVacunas/web/index.html</file>
         </group>
     </open-files>
 </project-private>

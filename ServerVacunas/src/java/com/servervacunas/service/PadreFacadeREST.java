@@ -5,11 +5,10 @@
  */
 package com.servervacunas.service;
 
-import com.servervacunas.Usuarios;
+import com.servervacunas.Padre;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,27 +25,27 @@ import javax.ws.rs.core.MediaType;
  * @author adriana
  */
 @Stateless
-@Path("com.servervacunas.usuarios")
-public class UsuariosPortadaREST extends AbstracPortada<Usuarios> {
+@Path("com.servervacunas.padre")
+public class PadreFacadeREST extends AbstractFacade<Padre> {
 
     @PersistenceContext(unitName = "vacunas")
     private EntityManager em;
 
-    public UsuariosPortadaREST() {
-        super(Usuarios.class);
+    public PadreFacadeREST() {
+        super(Padre.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Usuarios entity) {
+    public void create(Padre entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Usuarios entity) {
+    public void edit(@PathParam("id") Integer id, Padre entity) {
         super.edit(entity);
     }
 
@@ -59,21 +58,21 @@ public class UsuariosPortadaREST extends AbstracPortada<Usuarios> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Usuarios find(@PathParam("id") Integer id) {
+    public Padre find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Usuarios> findAll() {
+    public List<Padre> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Usuarios> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Padre> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -86,7 +85,6 @@ public class UsuariosPortadaREST extends AbstracPortada<Usuarios> {
 
     @Override
     protected EntityManager getEntityManager() {
-        em = Persistence.createEntityManagerFactory("vacunas").createEntityManager();
         return em;
     }
     

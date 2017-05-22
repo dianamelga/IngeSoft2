@@ -3,6 +3,9 @@
   <persistence-unit name="vacunas" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.servervacunas.Usuarios</class>
+    <class>com.servervacunas.Hijo</class>
+    <class>com.servervacunas.Padre</class>
+    <class>com.servervacunas.Vacunas</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Inge2"/>

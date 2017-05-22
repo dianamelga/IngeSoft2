@@ -24,7 +24,10 @@ public class ApplicationConfig extends Application {
 
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.servervacunas.service.UsuariosPortadaREST.class);
+        resources.add(com.servervacunas.service.HijoFacadeREST.class);
+        resources.add(com.servervacunas.service.PadreFacadeREST.class);
+        resources.add(com.servervacunas.service.UsuariosFacadeREST.class);
+        resources.add(com.servervacunas.service.VacunasFacadeREST.class);
     }
     
 }
