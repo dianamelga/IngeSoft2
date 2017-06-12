@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,7 @@ public class VacunasFragment extends Fragment {
   }
 
   public static VacunasFragment newInstance(int hijoId) {
+    Log.d("HijosActivity", "hijoId: "+String.valueOf(hijoId));
     VacunasFragment fragment = new VacunasFragment();
     Bundle args = new Bundle();
     args.putInt(ARG_HIJO_ID, hijoId);
@@ -55,6 +57,7 @@ public class VacunasFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+      Log.d("HijosActivity", "onCreateView");
     View root = inflater.inflate(R.layout.fragment_vacunas, container, false);
     mVacunasList = (ExpandableListView) root.findViewById(R.id.lvExp);
     mDQbdHelper = new BDHelper(getActivity());
@@ -69,8 +72,10 @@ public class VacunasFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+      Log.d("HijosActivity", "onCreate");
     if (getArguments() != null) {
       mHijoId = getArguments().getInt(ARG_HIJO_ID);
+        Log.d("HijosActivity", "mHijoId: "+String.valueOf(mHijoId));
     }
 
     setHasOptionsMenu(true);
@@ -112,6 +117,7 @@ public class VacunasFragment extends Fragment {
       Hijo hijo = new Hijo(cHIjo);
       String fecha;
       ArrayList<Vacuna> mArrayList = new ArrayList<Vacuna>();
+        Log.d("HijosActivity", String.valueOf(!cursor.isAfterLast()));
       for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
         // The Cursor is now set to the right position
         Vacuna v = new Vacuna(cursor);
@@ -121,6 +127,7 @@ public class VacunasFragment extends Fragment {
         mArrayList.add(v);
       }
       cHIjo.close();
+        Log.d("HijosActivity", "mArrayList.size(): "+String.valueOf(mArrayList.size()));
       return  mArrayList;
     }
   }

@@ -3,10 +3,13 @@ package vacunas.app.com.appvacunas.clases;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +40,7 @@ public class C_Adapter extends CursorAdapter{
 
     // Referencias UI.
     TextView nameText = (TextView) view.findViewById(R.id.tv_name);
+
     final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
     // Get valores..
@@ -44,8 +48,23 @@ public class C_Adapter extends CursorAdapter{
       + " " + cursor.getString(cursor.getColumnIndex(HijosEntry.APELLIDO));
     String avatarUri = ""; //No tenemos en la bd
 
+          int idx = cursor.getColumnIndex(HijosEntry.SEXO);
+          String sexo = cursor.getString(idx);
+
+      Log.d("HijosActivity",name+ " "+ sexo);
+          if (sexo.equals('F')){
+
+              avatarImage.setImageResource(R.drawable.girl);
+          }else{
+
+              avatarImage.setImageResource(R.drawable.boy);
+          }
     // Setup.
+
     nameText.setText(name);
+
+
+
     Glide
       .with(context)
       .load(Uri.parse("file:///android_asset/" + avatarUri))

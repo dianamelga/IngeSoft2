@@ -275,7 +275,7 @@ public class BDHelper extends SQLiteOpenHelper {
       " ", " ", " ", 48, 0));
 
     insertarVacuna(sqLiteDatabase, new Vacuna(23, "SPR", i, " ", 2,
-      " ", " ", " ", 48, 0));
+      " ", " ", " ", 48, 1));
   }
 
   public long insertarResponsable(SQLiteDatabase db, Responsable responsable){

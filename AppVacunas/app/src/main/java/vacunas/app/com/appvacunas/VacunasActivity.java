@@ -3,6 +3,7 @@ package vacunas.app.com.appvacunas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
 import vacunas.app.com.appvacunas.R;
@@ -21,6 +22,9 @@ public class VacunasActivity extends AppCompatActivity {
 
     int id = getIntent().getIntExtra(HijosActivity.EXTRA_HIJO_ID, 0);
 
+    Log.d("HijosActivity", "id: "+String.valueOf(id));
+
+      Log.d("HijosActivity", "fragment is null: "+String.valueOf(fragment == null));
     if (fragment == null) {
       fragment = VacunasFragment.newInstance(id);
       getSupportFragmentManager().beginTransaction().add(R.id.vacunas_container, fragment).commit();

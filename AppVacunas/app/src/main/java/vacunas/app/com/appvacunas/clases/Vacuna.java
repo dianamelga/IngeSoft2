@@ -7,7 +7,7 @@ import vacunas.app.com.appvacunas.data.VacunaContract.VacunasEntry;
 /**
  * Created by adriana on 9/4/2017.
  */
-//Entidad Vacuna
+//Entidad Vacuna, hace referencia a vacunas_hijos de la bd
 public class Vacuna {
   private int id;
   private String nombre_vac;

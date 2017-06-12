@@ -78,8 +78,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:text="@string/nextbutton_text"
-    android:visibility="visible"
-    tools:visibility="visible"
+    android:visibility="invisible"
+    tools:visibility="invisible"
     android:theme="@style/ThemeOverlay.MyDarkButton" />
 
   <RelativeLayout

@@ -204,18 +204,24 @@ public class MainActivity extends AppCompatActivity implements
     if (signedIn) {
       findViewById(R.id.sign_in_button).setVisibility(View.GONE);
       findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+      findViewById(R.id.next_button).setVisibility(View.VISIBLE);
     } else {
       mStatusTextView.setText(R.string.signed_out);
 
       findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
       findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+      findViewById(R.id.next_button).setVisibility(View.GONE);
     }
   }
 
   public void goToVacunasActivity(){
-    Intent intent = new Intent(this, HijosActivity.class);
+    Intent intent = new Intent(this, VacunasActivity.class);
     startActivity(intent);
   }
+    public void goToHijosActivity(){
+        Intent intent = new Intent(this, HijosActivity.class);
+        startActivity(intent);
+    }
 
   @Override
   public void onClick(View v) {
@@ -230,7 +236,8 @@ public class MainActivity extends AppCompatActivity implements
         revokeAccess();
         break;
       case R.id.next_button:
-        goToVacunasActivity();
+          Log.d("HijosActivity","goToHijosActvity");
+        goToHijosActivity();
         break;
     }
   }

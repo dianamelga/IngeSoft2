@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,31 +47,40 @@ public class HijosFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+      Log.d("HijosActivity", "inicializando view root");
     View root = inflater.inflate(R.layout.fragment_hijos, container, false);
 
     mHijosList = (ListView) root.findViewById(R.id.hijos_list);
+
     mHijosAdapter = new C_Adapter(getActivity(), null);
+
     mHijosList.setAdapter(mHijosAdapter);
+
 
     mHijosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
         Cursor currentItem = (Cursor) mHijosAdapter.getItem(i);
         int currentHijoId = currentItem.getInt(
           currentItem.getColumnIndex(HijosEntry.ID));
+          Log.d("HijosActivity", "showVacunasScreen: "+currentItem.getString(3));
         showVacunasScreen(currentHijoId);
       }
     });
 
 
+      Log.d("HijosActivity", "deleteDatabase");
     getActivity().deleteDatabase(BDHelper.DATABASE_NAME);
 
     BDHelper = new BDHelper(getActivity());
 
+      Log.d("HijosActivity", "loadHijos");
     loadHijos();
 
     //Crea las notificaciones solo la primera vez que corre la aplicacion
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+      Log.d("HijosActivity", "prefs.getBoolean: "+String.valueOf(!prefs.getBoolean("firstTime", false)));
     if (!prefs.getBoolean("firstTime", false)) {
       // <---- run your one time code here
       loadNotificaciones();
@@ -81,6 +91,7 @@ public class HijosFragment extends Fragment {
       editor.commit();
     }
 
+      Log.d("HijosActivity", "return root: "+String.valueOf(root));
     return root;
   }
 
@@ -147,7 +158,8 @@ public class HijosFragment extends Fragment {
 
 
   private void showVacunasScreen(int currentHijoId) {
-    Intent intent = new Intent(getActivity(), VacunasActivity.class);
+    Log.d("HijosActivity", "localClassName: "+getActivity().getLocalClassName()+" currentHijoid: "+String.valueOf(currentHijoId));
+      Intent intent = new Intent(getActivity(), VacunasActivity.class);
     intent.putExtra(HijosActivity.EXTRA_HIJO_ID, currentHijoId);
     startActivity(intent);
   }
