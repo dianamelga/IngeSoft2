@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements
     // Button listeners
     findViewById(R.id.sign_in_button).setOnClickListener(this);
     findViewById(R.id.sign_out_button).setOnClickListener(this);
-    findViewById(R.id.disconnect_button).setOnClickListener(this);
+   // findViewById(R.id.disconnect_button).setOnClickListener(this);
     findViewById(R.id.next_button).setOnClickListener(this);
 
     // [START configure_signin]
@@ -214,10 +214,6 @@ public class MainActivity extends AppCompatActivity implements
     }
   }
 
-  public void goToVacunasActivity(){
-    Intent intent = new Intent(this, VacunasActivity.class);
-    startActivity(intent);
-  }
     public void goToHijosActivity(){
         Intent intent = new Intent(this, HijosActivity.class);
         startActivity(intent);
@@ -232,9 +228,9 @@ public class MainActivity extends AppCompatActivity implements
       case R.id.sign_out_button:
         signOut();
         break;
-      case R.id.disconnect_button:
+      /*case R.id.disconnect_button:
         revokeAccess();
-        break;
+        break;*/
       case R.id.next_button:
           Log.d("HijosActivity","goToHijosActvity");
         goToHijosActivity();

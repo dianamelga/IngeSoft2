@@ -38,6 +38,7 @@ public class C_Adapter extends CursorAdapter{
   @Override
   public void bindView(View view, final Context context, Cursor cursor) {
 
+
     // Referencias UI.
     TextView nameText = (TextView) view.findViewById(R.id.tv_name);
 

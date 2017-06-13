@@ -72,15 +72,7 @@
 
   </LinearLayout>
 
-  <Button
-    android:id="@+id/next_button"
-    android:layout_width="234dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:text="@string/nextbutton_text"
-    android:visibility="invisible"
-    tools:visibility="invisible"
-    android:theme="@style/ThemeOverlay.MyDarkButton" />
+
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -118,12 +110,23 @@
         android:theme="@style/ThemeOverlay.MyDarkButton" />
 
       <Button
+          android:id="@+id/next_button"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/nextbutton_text"
+          android:visibility="invisible"
+          tools:visibility="invisible"
+          android:background="@android:color/holo_red_light"
+          android:theme="@style/ThemeOverlay.MyDarkButton" />
+
+      <!--Button
         android:id="@+id/disconnect_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/disconnect"
-        android:theme="@style/ThemeOverlay.MyDarkButton" />
+        android:theme="@style/ThemeOverlay.MyDarkButton" /-->
 
     </LinearLayout>
 

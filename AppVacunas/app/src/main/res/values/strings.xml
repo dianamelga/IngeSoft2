@@ -12,7 +12,7 @@
   <string name="sign_out">Sign Out</string>
   <string name="disconnect">Disconnect</string>
   <string name="nextbutton">Next</string>
-  <string name="nextbutton_text">GO</string>
+  <string name="nextbutton_text">CONTINUE</string>
 
   <string name="usuario" formatted="false">Usuario: \n%1$s \n%2$s </string>
 
