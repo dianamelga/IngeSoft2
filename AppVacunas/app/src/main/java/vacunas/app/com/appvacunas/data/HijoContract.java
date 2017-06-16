@@ -23,12 +23,13 @@ public class HijoContract {
     public static final String DIRECCION = "direccion";
     public static final String DEPARTAMENTO = "departamento";
     public static final String MUNICIPIO = "municipio";
+    public static final String ID_PADRE = "id_padre";
     public static final String BARRIO = "barrio";
     public static final String REFERENCIA = "referencia";
-    public static final String NOMBRE_RESPONSABLE = "nombre_responsable";
+   // public static final String NOMBRE_RESPONSABLE = "nombre_responsable";
     public static final String TELEFONO = "tel";
     public static final String SEGURO = "seguro";
     public static final String ALERGIA = "alergia";
-    public static final String ID_RESP = "id_resp";
+    //public static final String ID_RESP = "id_resp";
   }
 }

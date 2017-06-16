@@ -2,12 +2,10 @@ package vacunas.app.com.appvacunas.clases;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,10 +23,10 @@ public class ListAdapter extends BaseExpandableListAdapter {
   private Context _context;
   private List<String> _listDataHeader; // header titles
   // child data in format of header title, child title
-  private HashMap<String, List<Vacuna>> _listDataChild;
+  private HashMap<String, List<VacunaHijo>> _listDataChild;
 
   public ListAdapter(Context context, List<String> listDataHeader,
-                               HashMap<String, List<Vacuna>> listChildData) {
+                               HashMap<String, List<VacunaHijo>> listChildData) {
     this._context = context;
     this._listDataHeader = listDataHeader;
     this._listDataChild = listChildData;
@@ -49,7 +47,7 @@ public class ListAdapter extends BaseExpandableListAdapter {
   public View getChildView(int groupPosition, final int childPosition,
                            boolean isLastChild, View convertView, ViewGroup parent) {
 
-    final Vacuna vacuna = (Vacuna) getChild(groupPosition, childPosition);
+    final VacunaHijo vacunaHijo = (VacunaHijo) getChild(groupPosition, childPosition);
 
     if (convertView == null) {
       LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -57,47 +55,47 @@ public class ListAdapter extends BaseExpandableListAdapter {
       convertView = infalInflater.inflate(R.layout.list_item_vacunas, null);
     }
 
-    //Nombre vacuna
+    //Nombre vacunaHijo
     TextView txtListChild = (TextView) convertView
       .findViewById(R.id.lblListItem);
 
-    txtListChild.setText(vacuna.getNombre_vac());
+    txtListChild.setText(vacunaHijo.getNombre_vac());
 
     //Dosis
 
     txtListChild = (TextView) convertView.findViewById(R.id.tv_dosis);
-    txtListChild.setText("Dosis: " + String.valueOf(vacuna.getDosis()));
+    txtListChild.setText("Dosis: " + String.valueOf(vacunaHijo.getNro_dosis()));
 
     //Fecha
 
     txtListChild = (TextView) convertView.findViewById(R.id.tv_fecha);
-    txtListChild.setText("Fecha: " + vacuna.getFecha());
+    txtListChild.setText("Fecha: " + vacunaHijo.getFecha_programada());
 
     //Edad
     txtListChild = (TextView) convertView.findViewById(R.id.tv_edad);
-    txtListChild.setText("Edad: " + vacuna.getEdad());
+    txtListChild.setText("Edad: " + vacunaHijo.getEdad());
 
     //Lote
     txtListChild = (TextView) convertView.findViewById(R.id.tv_lote);
-    txtListChild.setText("Lote: " + vacuna.getLote());
+    txtListChild.setText("Lote: " + vacunaHijo.getLote());
 
     //Responsable
     txtListChild = (TextView) convertView.findViewById(R.id.tv_responsable);
-    txtListChild.setText("Responsable: " + vacuna.getResponsable());
+    txtListChild.setText("Responsable: " + vacunaHijo.getResponsable());
 
     ImageView imgListChild = (ImageView) convertView.findViewById(R.id.iv_vacunas);
 
     Calculador calc = new Calculador();
-    if(vacuna.getAplicado() == 1) {
+    if(vacunaHijo.getAplicado() == 1) {
       imgListChild.setImageResource(R.drawable.check_ok);
     }
-    else if (calc.vencido(vacuna.getFecha_apl(), vacuna.getMes_aplicacion())){
+    else if (calc.vencido(vacunaHijo.getFecha_aplicacion(), vacunaHijo.getMes_aplicacion())){
 
       imgListChild.setImageResource(R.drawable.no_check);
 
     }
     // imgListChild.setImageResource(R.drawable.no_check);}
-    else if (calc.enTiempo(vacuna.getFecha_apl())) {
+    else if (calc.enTiempo(vacunaHijo.getFecha_aplicacion())) {
       imgListChild.setImageResource(R.drawable.no_yet_orange);
     }
     else {

@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements
   }
 
   private void showProgressDialog() {
+    Log.d("HijosActivity", "processDialog: " +String.valueOf(mProgressDialog));
     if (mProgressDialog == null) {
       mProgressDialog = new ProgressDialog(this);
       mProgressDialog.setMessage(getString(R.string.loading));

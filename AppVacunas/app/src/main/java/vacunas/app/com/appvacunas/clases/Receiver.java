@@ -34,7 +34,7 @@ public class Receiver extends BroadcastReceiver{
       new NotificationCompat.Builder(context)
         .setSmallIcon(R.drawable.ic_notifications)
         .setContentTitle("Vacunar")
-        .setContentText("Vacuna Pendiente");
+        .setContentText("VacunaHijo Pendiente");
     Intent resultIntent = new Intent(context, VacunasActivity.class);
     int id = intent.getIntExtra(HijosActivity.EXTRA_HIJO_ID, 1);
     resultIntent.putExtra(HijosActivity.EXTRA_HIJO_ID, id);

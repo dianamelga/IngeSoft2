@@ -2,112 +2,85 @@ package vacunas.app.com.appvacunas.clases;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import vacunas.app.com.appvacunas.data.VacunaContract.VacunasEntry;
+
+import vacunas.app.com.appvacunas.data.VacunaContract;
+import vacunas.app.com.appvacunas.data.VacunaHijoContract;
 
 /**
- * Created by adriana on 9/4/2017.
+ * Created by dianamelgarejo on 6/15/2017.
  */
-//Entidad Vacuna, hace referencia a vacunas_hijos de la bd
+
 public class Vacuna {
-  private int id;
-  private String nombre_vac;
-  private int id_hijo;
-  private String edad;
-  private int dosis;
-  private String fecha;
-  private String lote;
-  private String responsable;
-  private int mes_aplicacion;
-  private int aplicado;
-  private String fecha_apl;
 
-  public Vacuna(int id, String nombre_vac, int id_hijo, String edad, int dosis, String fecha,
-                String lote, String responsable, int mes_aplicacion, int aplicado) {
-    this.id = id;
-    this.nombre_vac = nombre_vac;
-    this.id_hijo = id_hijo;
-    this.edad = edad;
-    this.dosis = dosis;
-    this.fecha = fecha;
-    this.lote = lote;
-    this.responsable = responsable;
-    this.mes_aplicacion = mes_aplicacion;
-    this.aplicado = aplicado;
-  }
+    private int id;
+    private int nro_dosis;
+    private String nombre_vacuna;
+    private int mes_aplicacion;
+    private int cant_dosis;
 
-  public Vacuna(Cursor cursor) {
-    id = cursor.getInt(cursor.getColumnIndex(VacunasEntry.ID));
-    nombre_vac = cursor.getString(cursor.getColumnIndex(VacunasEntry.NOMBRE_VAC));
-    id_hijo = cursor.getInt(cursor.getColumnIndex(VacunasEntry.ID_HIJO));
-    edad = cursor.getString(cursor.getColumnIndex(VacunasEntry.EDAD));
-    dosis = cursor.getInt(cursor.getColumnIndex(VacunasEntry.DOSIS));
-    fecha = cursor.getString(cursor.getColumnIndex(VacunasEntry.FECHA));
-    lote = cursor.getString(cursor.getColumnIndex(VacunasEntry.LOTE));
-    responsable = cursor.getString(cursor.getColumnIndex(VacunasEntry.RESPONSABLE));
-    mes_aplicacion = cursor.getInt(cursor.getColumnIndex(VacunasEntry.MES_APLICACION));
-    aplicado = cursor.getInt(cursor.getColumnIndex(VacunasEntry.APLICADO));
-  }
+    public Vacuna(int id, int nro_dosis, String nombre_vacuna, int mes_aplicacion, int cant_dosis) {
+        this.id = id;
+        this.nro_dosis = nro_dosis;
+        this.nombre_vacuna = nombre_vacuna;
+        this.mes_aplicacion = mes_aplicacion;
+        this.cant_dosis = cant_dosis;
+    }
+    public Vacuna(Cursor cursor) {
+        id = cursor.getInt(cursor.getColumnIndex(VacunaContract.VacunasEntry.ID));
+        nro_dosis = cursor.getInt(cursor.getColumnIndex(VacunaContract.VacunasEntry.NRO_DOSIS));
+        nombre_vacuna = cursor.getString(cursor.getColumnIndex(VacunaContract.VacunasEntry.NOMBRE_VACUNA));
+        mes_aplicacion = cursor.getInt(cursor.getColumnIndex(VacunaContract.VacunasEntry.MES_APLICACION));
+        cant_dosis = cursor.getInt(cursor.getColumnIndex(VacunaContract.VacunasEntry.CANT_DOSIS));
+    }
 
-  public ContentValues toContentValues() {
-    ContentValues values = new ContentValues();
-    values.put(VacunasEntry.ID, id);
-    values.put(VacunasEntry.NOMBRE_VAC, nombre_vac);
-    values.put(VacunasEntry.ID_HIJO, id_hijo);
-    values.put(VacunasEntry.EDAD, edad);
-    values.put(VacunasEntry.DOSIS, dosis);
-    values.put(VacunasEntry.FECHA, fecha);
-    values.put(VacunasEntry.LOTE, lote);
-    values.put(VacunasEntry.RESPONSABLE, responsable);
-    values.put(VacunasEntry.MES_APLICACION, mes_aplicacion);
-    values.put(VacunasEntry.APLICADO, aplicado);
-    return values;
-  }
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(VacunaContract.VacunasEntry.ID, id);
+        values.put(VacunaContract.VacunasEntry.NRO_DOSIS, nro_dosis);
+        values.put(VacunaContract.VacunasEntry.NOMBRE_VACUNA, nombre_vacuna);
+        values.put(VacunaContract.VacunasEntry.MES_APLICACION, mes_aplicacion);
+        values.put(VacunaContract.VacunasEntry.CANT_DOSIS, cant_dosis);
+        return values;
+    }
 
-  public int getId() {
-    return id;
-  }
 
-  public String getNombre_vac() {
-    return nombre_vac;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public int getId_hijo() {
-    return id_hijo;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public String getEdad() {
-    return edad;
-  }
+    public int getNro_dosis() {
+        return nro_dosis;
+    }
 
-  public int getDosis() {
-    return dosis;
-  }
+    public void setNro_dosis(int nro_dosis) {
+        this.nro_dosis = nro_dosis;
+    }
 
-  public String getFecha() {
-    return fecha;
-  }
+    public String getNombre_vacuna() {
+        return nombre_vacuna;
+    }
 
-  public String getLote() {
-    return lote;
-  }
+    public void setNombre_vacuna(String nombre_vacuna) {
+        this.nombre_vacuna = nombre_vacuna;
+    }
 
-  public String getResponsable() {
-    return responsable;
-  }
+    public int getMes_aplicacion() {
+        return mes_aplicacion;
+    }
 
-  public int getMes_aplicacion() {
-    return mes_aplicacion;
-  }
+    public void setMes_aplicacion(int mes_aplicacion) {
+        this.mes_aplicacion = mes_aplicacion;
+    }
 
-  public void setFecha_apl(String fecha) {
-    this.fecha_apl = fecha;
-  }
+    public int getCant_dosis() {
+        return cant_dosis;
+    }
 
-  public String getFecha_apl() {
-    return fecha_apl;
-  }
-
-  public int getAplicado() {
-    return  aplicado;
-  }
+    public void setCant_dosis(int cant_dosis) {
+        this.cant_dosis = cant_dosis;
+    }
 }

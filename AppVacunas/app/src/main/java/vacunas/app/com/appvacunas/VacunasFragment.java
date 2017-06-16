@@ -17,11 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import vacunas.app.com.appvacunas.R.id;
-import vacunas.app.com.appvacunas.Calculador;
 import vacunas.app.com.appvacunas.clases.Hijo;
 import vacunas.app.com.appvacunas.clases.ListAdapter;
-import vacunas.app.com.appvacunas.clases.Vacuna;
+import vacunas.app.com.appvacunas.clases.VacunaHijo;
 import vacunas.app.com.appvacunas.data.BDHelper;
 
 /**
@@ -38,7 +36,7 @@ public class VacunasFragment extends Fragment {
   private ListAdapter mVacunasAdapter;
 
   List<String> listDataHeader;
-  HashMap<String, List<Vacuna>> listDataChild;
+  HashMap<String, List<VacunaHijo>> listDataChild;
 
 
   public VacunasFragment() {
@@ -57,22 +55,26 @@ public class VacunasFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-      Log.d("HijosActivity", "onCreateView");
-    View root = inflater.inflate(R.layout.fragment_vacunas, container, false);
-    mVacunasList = (ExpandableListView) root.findViewById(R.id.lvExp);
-    mDQbdHelper = new BDHelper(getActivity());
-    prepareListData();
-    mVacunasAdapter = new ListAdapter(getActivity(), listDataHeader, listDataChild);
-    mVacunasList.setAdapter(mVacunasAdapter);
-
-    return root;
+      Log.d("HijosActivity", "1. onCreateView");
+      try {
+          View root = inflater.inflate(R.layout.fragment_vacunas, container, false);
+          mVacunasList = (ExpandableListView) root.findViewById(R.id.lvExp);
+          mDQbdHelper = new BDHelper(getActivity());
+          prepareListData();
+          mVacunasAdapter = new ListAdapter(getActivity(), listDataHeader, listDataChild);
+          mVacunasList.setAdapter(mVacunasAdapter);
+          return root;
+      }catch (Exception e){
+          Log.d("HijosActivity", e.getMessage());
+      }
+    return null; /**/
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-      Log.d("HijosActivity", "onCreate");
+      Log.d("HijosActivity", "onCreate de Vacunas Fragment");
     if (getArguments() != null) {
       mHijoId = getArguments().getInt(ARG_HIJO_ID);
         Log.d("HijosActivity", "mHijoId: "+String.valueOf(mHijoId));
@@ -83,6 +85,8 @@ public class VacunasFragment extends Fragment {
   }
 
   public boolean onOptionsItemSelected(MenuItem item) {
+    Log.d("HijosActivity", "onOptionsItemSelected de VacunasFragment");
+    Log.d("HijosActivity", "item.getItenId(): "+String.valueOf(item.getItemId()));
     switch (item.getItemId()) {
       case R.id.action_info:
         showHijosScreen(mHijoId);
@@ -110,24 +114,24 @@ public class VacunasFragment extends Fragment {
   private class DatosLoadTask extends AsyncTask<String, Void, ArrayList> {
 
     @Override
-    protected ArrayList<Vacuna> doInBackground(String... par) {
+    protected ArrayList<VacunaHijo> doInBackground(String... par) {
       Cursor cursor = mDQbdHelper.getVacunasByMes(par[0], par[1]);
       Cursor cHIjo = mDQbdHelper.getHijoById(String.valueOf(mHijoId));
       cHIjo.moveToFirst();
       Hijo hijo = new Hijo(cHIjo);
       String fecha;
-      ArrayList<Vacuna> mArrayList = new ArrayList<Vacuna>();
-        Log.d("HijosActivity", String.valueOf(!cursor.isAfterLast()));
+      ArrayList<VacunaHijo> mArrayList = new ArrayList<VacunaHijo>();
+        //Log.d("HijosActivity", String.valueOf(!cursor.isAfterLast()));
       for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
         // The Cursor is now set to the right position
-        Vacuna v = new Vacuna(cursor);
+        VacunaHijo v = new VacunaHijo(cursor);
         Calculador ut = new Calculador();
         fecha = ut.calcularFecha(hijo.getFecha_nac(), v.getMes_aplicacion());
-        v.setFecha_apl(fecha);
+        v.setFecha_aplicacion(fecha);
         mArrayList.add(v);
       }
       cHIjo.close();
-        Log.d("HijosActivity", "mArrayList.size(): "+String.valueOf(mArrayList.size()));
+        //Log.d("HijosActivity", "mArrayList.size(): "+String.valueOf(mArrayList.size()));
       return  mArrayList;
     }
   }
@@ -136,7 +140,7 @@ public class VacunasFragment extends Fragment {
 
   private void prepareListData() {
     listDataHeader = new ArrayList<String>();
-    listDataChild = new HashMap<String, List<Vacuna>>();
+    listDataChild = new HashMap<String, List<VacunaHijo>>();
 
     // Adding child data
     listDataHeader.add("Al nacer");
@@ -149,7 +153,7 @@ public class VacunasFragment extends Fragment {
     listDataHeader.add("Cuarenta y ocho meses");
 
     // Adding child data
-    List<Vacuna> lista = new DatosLoadTask().doInBackground("0", String.valueOf(mHijoId));
+    List<VacunaHijo> lista = new DatosLoadTask().doInBackground("0", String.valueOf(mHijoId));
 
     listDataChild.put(listDataHeader.get(0), lista); // Header, Child data
 

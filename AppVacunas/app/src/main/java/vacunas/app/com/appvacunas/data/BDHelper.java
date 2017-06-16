@@ -4,13 +4,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import vacunas.app.com.appvacunas.clases.Hijo;
+import vacunas.app.com.appvacunas.clases.Usuario;
 import vacunas.app.com.appvacunas.clases.Vacuna;
-import vacunas.app.com.appvacunas.clases.Responsable;
-import vacunas.app.com.appvacunas.data.HijoContract.HijosEntry;
+import vacunas.app.com.appvacunas.clases.VacunaHijo;
+import vacunas.app.com.appvacunas.data.PadreContract.PadresEntry;
 import vacunas.app.com.appvacunas.data.VacunaContract.VacunasEntry;
-import vacunas.app.com.appvacunas.data.ResponsableContract.ResponsablesEntry;
+
+import vacunas.app.com.appvacunas.data.HijoContract.HijosEntry;
+import vacunas.app.com.appvacunas.data.VacunaHijoContract.VacunaHijosEntry;
+import vacunas.app.com.appvacunas.data.UsuarioContract.UsuariosEntry;
 
 /**
  * Created by adriana on 9/4/2017.
@@ -28,16 +36,13 @@ public class BDHelper extends SQLiteOpenHelper {
   @Override
   public void onCreate(SQLiteDatabase db) {
 
-    db.execSQL("CREATE TABLE " + ResponsablesEntry.TABLE_NAME + " ("
-      + ResponsablesEntry._ID + " INTEGER PRIMARY KEY,"
-      + ResponsablesEntry.ID + " INTEGER NOT NULL,"
-      + ResponsablesEntry.CI + " INTEGER NOT NULL,"
-      + ResponsablesEntry.NOMBRE + " TEXT NOT NULL,"
-      + ResponsablesEntry.APELLIDO + " TEXT NOT NULL,"
-      + ResponsablesEntry.CORREO + " TEXT NOT NULL,"
-      + ResponsablesEntry.FECHA_NAC + " TEXT NOT NULL,"
-      + ResponsablesEntry.LUGAR_NAC + " TEXT,"
-      + "UNIQUE (" + ResponsablesEntry.ID + "))"
+    db.execSQL("CREATE TABLE " + UsuariosEntry.TABLE_NAME + " ("
+            + UsuariosEntry._ID + " INTEGER PRIMARY KEY,"
+            + UsuariosEntry.ID + " INTEGER NOT NULL,"
+            + UsuariosEntry.NOMBRE + " TEXT NOT NULL,"
+            + UsuariosEntry.CORREO + " TEXT NOT NULL,"
+            + UsuariosEntry.ID_PADRE + " INTEGER NOT NULL,"
+            + "UNIQUE (" + UsuariosEntry.ID + "))"
     );
 
     db.execSQL("CREATE TABLE " + HijosEntry.TABLE_NAME + " ("
@@ -53,33 +58,49 @@ public class BDHelper extends SQLiteOpenHelper {
       + HijosEntry.DIRECCION + " TEXT,"
       + HijosEntry.DEPARTAMENTO + " TEXT,"
       + HijosEntry.MUNICIPIO + " TEXT,"
+            + HijosEntry.ID_PADRE + " INTEGER NOT NULL, "
       + HijosEntry.BARRIO + " TEXT,"
       + HijosEntry.REFERENCIA + " TEXT,"
-      + HijosEntry.NOMBRE_RESPONSABLE + " TEXT NOT NULL,"
       + HijosEntry.TELEFONO + " TEXT,"
       + HijosEntry.SEGURO + " TEXT,"
-      + HijosEntry.ID_RESP + " INTEGER NOT NULL,"
       + "UNIQUE (" + HijosEntry.ID + "),"
-      + "FOREIGN KEY (" + HijosEntry.ID_RESP + ") REFERENCES "
-      + ResponsablesEntry.TABLE_NAME + "(" + ResponsablesEntry.ID + "))"
+      + "FOREIGN KEY (" + HijosEntry.ID_PADRE + ") REFERENCES "
+      + PadresEntry.TABLE_NAME + "(" + PadresEntry.ID + "))"
     );
 
-    db.execSQL("CREATE TABLE " + VacunasEntry.TABLE_NAME + " ("
+      db.execSQL("CREATE TABLE "+ VacunasEntry.TABLE_NAME + " ("
+      + VacunasEntry.ID + " INTEGER NOT NULL, "
+      + VacunasEntry.NRO_DOSIS + " INTEGER NOT NULL, "
+      + VacunasEntry.NOMBRE_VACUNA + " TEXT NOT NULL, "
+      + VacunasEntry.MES_APLICACION + " INTEGER NOT NULL, "
+      + VacunasEntry.CANT_DOSIS + " INTEGER NOT NULL, "
+      + " PRIMARY KEY ("+ VacunasEntry.ID + "))");
+
+    db.execSQL("CREATE TABLE " + VacunaHijosEntry.TABLE_NAME + " ("
       //+ VacunasEntry._ID + " INTEGER PRIMARY KEY,"
-      + VacunasEntry.ID + " INTEGER NOT NULL,"
-      + VacunasEntry.NOMBRE_VAC + " TEXT NOT NULL,"
-      + VacunasEntry.ID_HIJO + " INTEGER NOT NULL,"
-      + VacunasEntry.EDAD + " TEXT,"
-      + VacunasEntry.DOSIS + " INTEGER,"
-      + VacunasEntry.FECHA + " TEXT,"
-      + VacunasEntry.LOTE + " TEXT,"
-      + VacunasEntry.RESPONSABLE + " TEXT,"
-      + VacunasEntry.MES_APLICACION + " INTEGER NOT NULL,"
-      + VacunasEntry.APLICADO + " INTEGER NOT NULL,"
+      + VacunaHijosEntry.ID + " INTEGER NOT NULL,"
+            + VacunaHijosEntry.NRO_DOSIS + " INTEGER NOT NULL,"
+
+            + VacunaHijosEntry.ID_HIJO + " INTEGER NOT NULL, "
+            + VacunaHijosEntry.FECHA_PROGRAMADA + " TEXT NOT NULL, "
+            + VacunaHijosEntry.LOTE + " TEXT NOT NULL, "
+            + VacunaHijosEntry.RESPONSABLE + " TEXT NOT NULL, "
+            + VacunaHijosEntry.APLICADO + " INTEGER NOT NULL, "
+            + VacunaHijosEntry.FECHA_APLICACION + " TEXT NOT NULL, "
+            + VacunaHijosEntry.DIAS_ATRASO + " INTEGER NOT NULL, "
+            + VacunaHijosEntry.MES_APLICACION + " INTEGER NOT NULL, "
+            + VacunaHijosEntry.NOMBRE_VAC + " TEXT NOT NULL,"
+
       //+ "UNIQUE (" + VacunasEntry.ID + "),"
-      + " PRIMARY KEY(" + VacunasEntry.ID + ", " + VacunasEntry.ID_HIJO + "), "
-      + "FOREIGN KEY (" + VacunasEntry.ID_HIJO + ") REFERENCES "
-      + HijosEntry.TABLE_NAME + "(" + HijosEntry.ID + "))"
+      + " PRIMARY KEY(" + VacunaHijosEntry.ID + ", " + VacunaHijosEntry.NRO_DOSIS +
+            ", " + VacunaHijosEntry.ID_HIJO + "))"
+            /*+ "), "
+      + "FOREIGN KEY (" + VacunaHijosEntry.ID_HIJO + ") REFERENCES "
+      + HijosEntry.TABLE_NAME + "(" + HijosEntry.ID + "), "
+            + "FOREIGN KEY (" + VacunaHijosEntry.ID + ", "
+            + VacunaHijosEntry.NRO_DOSIS + ") REFERENCES "
+            + VacunasEntry.TABLE_NAME + "(" + VacunasEntry.ID + ", "
+            + VacunasEntry.NRO_DOSIS + "))"*/
     );
 
     insertarDatos(db);
@@ -93,194 +114,124 @@ public class BDHelper extends SQLiteOpenHelper {
 
   public void insertarDatos( SQLiteDatabase sqLiteDatabase) {
 
+      Log.d("HijosActivity", "*********insertarDatos********");
+
     //Hijos
+      ArrayList<Hijo> hijos = new ArrayList<>();
+      hijos.add( new Hijo(1, 4572778, "Mauricio", "Troche", "10/12/2003",
+              "San Lorenzo", "M", "Paraguaya", "Calle Capitan Cabral", "Central", "Luque",1,
+              "Cuarto Barrio", null, "0981444555", null));
+      hijos.add(new Hijo(2, 5975779, "Mirna", "Troche", "20/02/2017",
+              "San Lorenzo", "F", "Paraguaya", "Calle Capitan Cabral", "Central", "Luque", 1,
+              "Cuarto Barrio", null, "0981333355", null));
 
-    insertarHijos(sqLiteDatabase, new Hijo(1, 4572778, "Mauricio", "Troche", "10/12/2003",
-      "San Lorenzo", "M", "Paraguaya", "Calle Capitan Cabral", "Central", "Luque",
-      "Cuarto Barrio", null, "Cindy Ortega", "0981444555", null, 1));
-
-    insertarHijos(sqLiteDatabase, new Hijo(2, 5975779, "Mirna", "Troche", "20/02/2017",
-      "San Lorenzo", "F", "Paraguaya", "Calle Capitan Cabral", "Central", "Luque",
-      "Cuarto Barrio", null, "Cindy Ortega", "0981333355", null, 1));
-
-    insertarHijos(sqLiteDatabase, new Hijo(3, 5775632, "Jimy", "Amarilla", "02/06/2000",
-      "Yaguaron", "M", "Paraguaya", "Calle Mcal. Lopex", "Central", "San Lorenzo",
-      "Esperanza", null, "Adriana Arce", "0983123321", null, 2));
-
-    insertarHijos(sqLiteDatabase, new Hijo(4, 8764234, "Sofia", "Frutos", "25/04/2012",
-      "Luque", "F", "Paraguaya", "Las Residentas", "Paraguari", "Yaguaron",
-      "San Roque", null, "Diana Melgarejo", "0971650859", null, 3));
+      hijos.add(new Hijo(3, 5775632, "Jimy", "Amarilla", "02/06/2000",
+              "Yaguaron", "M", "Paraguaya", "Calle Mcal. Lopex", "Central", "San Lorenzo",1,
+              "Esperanza", null, "0983123321", null));
+      hijos.add(new Hijo(4, 8764234, "Sofia", "Frutos", "25/04/2012",
+              "Luque", "F", "Paraguaya", "Las Residentas", "Paraguari", "Yaguaron",1,
+              "San Roque", null, "0971650859", null));
 
 
-    //Responsables
+      for (int i=0; i < hijos.size(); i++){
+          long result = insertarHijos(sqLiteDatabase, hijos.get(i));
+          Log.d("HijosActivity"," result insertarHijos: "+String.valueOf(result));
+      }
 
-    insertarResponsable(sqLiteDatabase, new Responsable(1, 3987431, "Cindy", "Ortega",
-      "cindyortega@gmail.com", "29/12/1994", "Luque"));
 
-    insertarResponsable(sqLiteDatabase, new Responsable(2, 5218201, "Adriana", "Arce",
-      "adrianaarce@gmail.com", "09/05/1995", "Yaguaron"));
+    //Usuarios Responsables
 
-    insertarResponsable(sqLiteDatabase, new Responsable(3, 4923823, "Diana", "Melgarejo",
-      "dianamelga@gmail.com", "19/03/1990", "Luque"));
+    insertarUsuario(sqLiteDatabase, new Usuario(1, 3987431, "Cindy",
+      "cindyortega@gmail.com", 1));
+
+      insertarUsuario(sqLiteDatabase, new Usuario(2, 5218201, "Adriana",
+      "adrianaarce@gmail.com", 1));
+
+      insertarUsuario(sqLiteDatabase, new Usuario(3, 4923823, "Diana",
+      "di.melgarejo@gmail.com", 1));
 
 
     //Datos de las vacunas
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(0, "BCG (Tuberculosis)", 3 , "0 meses", 1,
-      "18/07/2016", "H018653", " ", 0, 1));
+      ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+      vacunas.add(new Vacuna(1, 1, "BCG (Tuberculosis)", 0, 1));
+      vacunas.add(new Vacuna(2,1, "Rotavirus", 2 , 2));
+      vacunas.add(new Vacuna(2,2, "Rotavirus", 4 , 2));
+      vacunas.add(new Vacuna(3, 1, "IPV", 2, 5));
+      vacunas.add(new Vacuna(3, 2, "IPV", 4, 5));
+      vacunas.add(new Vacuna(3, 3, "IPV", 6, 5));
+      vacunas.add(new Vacuna(3, 4, "IPV", 18, 5));
+      vacunas.add(new Vacuna(3, 5, "IPV", 48, 5));
+      vacunas.add(new Vacuna(4, 1, "PCV 10 Valente", 2, 3));
+      vacunas.add(new Vacuna(4, 2, "PCV 10 Valente", 4, 3));
+      vacunas.add(new Vacuna(4, 3, "PCV 10 Valente", 12, 3));
+      vacunas.add(new Vacuna(5,1, "Pentavalente", 2, 2));
+      vacunas.add(new Vacuna(5,2, "Pentavalente", 4, 2));
+      vacunas.add(new Vacuna(5,3, "Pentavalente", 6, 2));
+      vacunas.add( new Vacuna(6, 1, "OPV/IPV", 4, 4));
+      vacunas.add( new Vacuna(6, 2, "OPV/IPV", 6, 4));
+      vacunas.add(new Vacuna(6, 3, "OPV/IPV", 18, 4));
+      vacunas.add(new Vacuna(6, 4, "OPV/IPV", 48, 4));
+      vacunas.add(new Vacuna(7, 1, "Influenza 1ra", 6, 1));
+      vacunas.add(new Vacuna(8, 1, "Influenza 2ra", 6, 1));
+      vacunas.add(new Vacuna(9, 1, "S.P.R", 12, 2));
+      vacunas.add(new Vacuna(9, 2, "S.P.R", 12, 2));
+      vacunas.add(new Vacuna(10, 1, "A.A", 12, 1));
+      vacunas.add(new Vacuna(12, 1, "V.V.Z", 15, 1));
+      vacunas.add( new Vacuna(13, 1, "V.H.A", 15, 1));
+      vacunas.add(new Vacuna(14, 1, "D.P.T", 18, 1));
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(1, "Rotavirus", 3 , "2 meses", 1,
-      "31/01/2017", "H018900", " ", 2, 1));
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(2, "IPV", 3, "2 meses", 1,
-      "20081/2017", "I032950", " ", 2, 1));
+      long result;
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(3, "PCV 10 Valente", 3, "2 meses", 1,
-      "13/01/2013", "P993446", " ", 2, 1));
+          for (int i = 0; i < vacunas.size(); i++) {
+              result = insertarVacuna(sqLiteDatabase, vacunas.get(i));
+              Log.d("HijosActivity", "result insertarVacuna: "+String.valueOf(result));
+              for (int j = 0; j < hijos.size(); j++) {
+                  result = insertarTodo(sqLiteDatabase, vacunas.get(i), hijos.get(j));
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(4, "Pentavalente", 3, "2 meses", 1,
-      "28/01/2017", "H015963", " ", 2, 1));
+                  Log.d("HijosActivity", "result insertarTodo: "+String.valueOf(result));
+              }
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(5, "OPV/IPV", 3, "4 meses", 1,
-      "20/05/2017", "P233456", " ", 4, 1));
+          }
+      Log.d("HijosActivity", " FIN FOR VACUNAS");
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(6, "Rotavirus", 3, "4 meses", 2,
-      "18/03/2017", "H018901", " ", 4, 1));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(7, "PCV 10 Valente", 3, " ", 2,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(8, "Pentavalente", 3, " ", 2,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(9, "OPV/IPV", 3, " ", 2,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(10, "Pentavalente", 3, " ", 3,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(11, "Influenza 1RA", 3, " ", 1,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(12, "Influenza 2RA", 3, " ", 1,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(13, "SPR", 3, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(14, "PCV 10 REF.", 3, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(15, "AA", 3, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(16, "Influenza.", 3, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(17, "V.V.Z.", 3, " ", 1,
-      " ", " ", " ", 15, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(18, "V.H.A.", 3, " ", 1,
-      " ", " ", " ", 15, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(19, "OPV/IPV", 3, " ", 3,
-      " ", " ", " ", 18, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(20, "D.P.T.", 3, " ", 1,
-      " ", " ", " ", 18, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(21, "OPV/IPV", 3, " ", 4,
-      " ", " ", " ", 48, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(22, "D.P.T.", 3, " ", 2,
-      " ", " ", " ", 48, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(23, "SPR", 3, " ", 2,
-      " ", " ", " ", 48, 0));
-
-    insertarTodo(sqLiteDatabase, 1);
-    insertarTodo(sqLiteDatabase, 2);
-    insertarTodo(sqLiteDatabase, 4);
-    insertarTodo(sqLiteDatabase, 5);
   }
 
-  private void insertarTodo(SQLiteDatabase sqLiteDatabase, int i) {
-    insertarVacuna(sqLiteDatabase, new Vacuna(0, "BCG (Tuberculosis)", i, " ", 1,
-      " ", " ", " ", 0, 0));
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(1, "Rotavirus", i , " ", 1,
-      " ", " ", " ", 2, 0));
+  public long insertarTodo(SQLiteDatabase db, Vacuna vacuna, Hijo hijo) {
+      Log.d("HijosActivity", "insertar todo...");
+      VacunaHijo vacunaHijo = new VacunaHijo(
+              vacuna.getId(),
+              vacuna.getNro_dosis(),
+              hijo.getId(),
+              vacuna.getNombre_vacuna(),
+              "15/06/2017",
+              "",
+              "Dr.Duarte",
+              0,/*aplicado*/
+              "15/06/2017",
+              0,
+              vacuna.getMes_aplicacion(),
+              0
+      );
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(2, "IPV", i, " ", 1,
-      " ", " ", " ", 2, 0));
+      long insert =0;
+      try {
+          insert = db.insert(
+                  VacunaHijosEntry.TABLE_NAME,
+                  null,
+                  vacunaHijo.toContentValues());
+      }catch(Exception e){
+          Log.d("HijosActivity", "SQLException: "+e.getMessage());
+      }
+      return insert;
 
-    insertarVacuna(sqLiteDatabase, new Vacuna(3, "PCV 10 Valente", i, " ", 1,
-      " ", " ", " ", 2, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(4, "Pentavalente", i, " ", 1,
-      " ", " ", " ", 2, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(5, "OPV/IPV", i, " ", 1,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(6, "Rotavirus", i, " ", 2,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(7, "PCV 10 Valente", i, " ", 2,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(8, "Pentavalente", i, " ", 2,
-      " ", " ", " ", 4, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(9, "OPV/IPV", i, " ", 2,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(10, "Pentavalente", i, " ", 3,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(11, "Influenza 1RA", i, " ", 1,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(12, "Influenza 2RA", i, " ", 1,
-      " ", " ", " ", 6, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(13, "SPR", i, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(14, "PCV 10 REF.", i, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(15, "AA", i, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(16, "Influenza.", i, " ", 1,
-      " ", " ", " ", 12, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(17, "V.V.Z.", i, " ", 1,
-      " ", " ", " ", 15, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(18, "V.H.A.", i, " ", 1,
-      " ", " ", " ", 15, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(19, "OPV/IPV", i, " ", 3,
-      " ", " ", " ", 18, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(20, "D.P.T.", i, " ", 1,
-      " ", " ", " ", 18, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(21, "OPV/IPV", i, " ", 4,
-      " ", " ", " ", 48, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(22, "D.P.T.", i, " ", 2,
-      " ", " ", " ", 48, 0));
-
-    insertarVacuna(sqLiteDatabase, new Vacuna(23, "SPR", i, " ", 2,
-      " ", " ", " ", 48, 1));
   }
 
-  public long insertarResponsable(SQLiteDatabase db, Responsable responsable){
+  public long insertarUsuario(SQLiteDatabase db, Usuario responsable){
     return db.insert(
-      ResponsablesEntry.TABLE_NAME,
+      UsuariosEntry.TABLE_NAME,
       null,
       responsable.toContentValues());
   }
@@ -336,19 +287,23 @@ public class BDHelper extends SQLiteOpenHelper {
   }
 
   public Cursor getVacunasByMes(String vacunaMes, String hijoId) {
-    Cursor c = getReadableDatabase().rawQuery("SELECT * FROM "
-        + VacunasEntry.TABLE_NAME + " WHERE " +
-        VacunasEntry.MES_APLICACION + " = ? AND " +
-        VacunasEntry.ID_HIJO + " = ?"
+      String query = " SELECT * FROM "
+              + VacunaHijosEntry.TABLE_NAME + " WHERE " +
+              VacunaHijosEntry.MES_APLICACION + " = ? AND " +
+              VacunaHijosEntry.ID_HIJO + " = ? ";
+
+      Log.d("HijosActivity", "query: "+query+ " "+ vacunaMes + " " + hijoId);
+
+    Cursor c = getReadableDatabase().rawQuery(query
       , new String[]{vacunaMes, hijoId});
     return c;
   }
 
   public Cursor getNoAplicadas(String hijoId) {
     Cursor c = getReadableDatabase().rawQuery("SELECT * FROM "
-        + VacunasEntry.TABLE_NAME + " WHERE " +
-        VacunasEntry.APLICADO + " = ? AND " +
-        VacunasEntry.ID_HIJO + " = ?"
+        + VacunaHijosEntry.TABLE_NAME + " WHERE " +
+                    VacunaHijosEntry.APLICADO + " = ? AND " +
+                    VacunaHijosEntry.ID_HIJO + " = ?"
       , new String[]{"0", hijoId});
     return c;
   }
