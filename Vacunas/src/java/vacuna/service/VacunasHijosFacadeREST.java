@@ -102,8 +102,9 @@ public class VacunasHijosFacadeREST extends AbstractFacade<VacunasHijos> {
     public List<Vacunas> findVacunas(@PathParam("idh") int idh) {
         List<Vacunas> l;
         l = getEntityManager()
-                    .createQuery("SELECT u FROM VacunasHijos u WHERE u.vacunasHijosPK.idHijo = :idh")
+                    .createQuery("SELECT u FROM VacunasHijos u WHERE u.vacunasHijosPK.idHijo  = :idh")
                     .setParameter("idh", idh).getResultList();
+        
         return l;
     }
     

@@ -1,8 +1,11 @@
 package vacunas.app.com.appvacunas;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +27,15 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+import org.apache.http.client.*;
+
+import vacunas.app.com.appvacunas.clases.Usuario;
+
 
 public class MainActivity extends AppCompatActivity implements
   GoogleApiClient.OnConnectionFailedListener,
@@ -31,10 +43,13 @@ public class MainActivity extends AppCompatActivity implements
   private GoogleApiClient client;
   private static final String TAG = "MainActivity";
   private static final int RC_SIGN_IN = 9001;
-
+    public static final String EXTRA_USUARIO_ID = "extra_usuario_id";   //Extra para HijosActivity
   private GoogleApiClient mGoogleApiClient;
   private TextView mStatusTextView;
   private ProgressDialog mProgressDialog;
+    private Usuario u;
+
+    private final String  URL_SERVICE = "http://diana:8080/Vacunas/webresources/vacuna.usuarios";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -233,8 +248,9 @@ public class MainActivity extends AppCompatActivity implements
         revokeAccess();
         break;*/
       case R.id.next_button:
-          Log.d("HijosActivity","goToHijosActvity");
-        goToHijosActivity();
+          Log.d("HijosActivity","confirm()");
+          confirm();
+        //goToHijosActivity();
         break;
     }
   }
@@ -254,6 +270,91 @@ public class MainActivity extends AppCompatActivity implements
       .setObject(object)
       .setActionStatus(Action.STATUS_TYPE_COMPLETED)
       .build();
+  }
+
+    private void confirm() {
+        new Consultar().execute();
+    }   //consultar si se encuentra en la bd
+
+    //Despues de verificar, pasa a la siguiente actividad, enviando como parametro
+    //el id del usuario
+    private void siguiente() {
+        Intent confint = new Intent(this, HijosActivity.class);
+        confint.putExtra(EXTRA_USUARIO_ID, u.getId());
+        startActivity(confint);
+    }
+
+  //obtener datos de la bd
+    private class Consultar extends AsyncTask<Void, Void, Boolean> {
+
+      //datos que se obtendran de la bd
+      private int idUsu;
+      private int ciUsu;
+      private String nombreUsu;
+      private String correoUsu;
+      private int idPadreUsu;
+      AlertDialog alertDialog;
+
+
+      protected void onPreExecute(){
+          //Alerta en caso de que no se encuentre en la bd
+          super.onPreExecute();
+          alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+
+      }
+
+      @Override
+      protected Boolean doInBackground(Void... params) {
+          boolean resul = true;
+
+          HttpClient httpClient = new DefaultHttpClient();
+
+
+          //servicio rest
+          HttpGet del =
+                  new HttpGet(URL_SERVICE+"/mail/"+correoUsu);
+
+          del.setHeader("content-type", "application/json");
+
+          try {
+              HttpResponse resp = httpClient.execute(del);
+              String respStr = EntityUtils.toString(resp.getEntity());
+
+              //se obitene el Json del usuario
+              JSONObject respJSON = new JSONObject(respStr);
+
+              idUsu = respJSON.getInt("id");
+              ciUsu = respJSON.getInt("ci");
+              nombreUsu = respJSON.getString("nombre");
+              correoUsu = respJSON.getString("correo");
+              idPadreUsu = respJSON.getInt("id_padre");
+
+
+          }catch(Exception e){
+              Log.e("ServicioRest", "Error!", e);
+              resul = false;
+          }
+
+          return resul;
+      }
+
+      protected void onPostExecute(Boolean result){
+          if (result) {
+              u = new Usuario(idUsu, ciUsu, nombreUsu, correoUsu, idPadreUsu);
+              siguiente();
+              //si no hay error pasa a la siguiente actividad
+          }else{
+              alertDialog.setTitle("Error");
+              alertDialog.setMessage("No registrado en la base de datos");
+              alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                      new DialogInterface.OnClickListener(){
+                          public void onClick(DialogInterface dialog, int wich){
+                              dialog.dismiss();
+                          }
+                      });
+              alertDialog.show();
+          }
+      }
   }
 }
 

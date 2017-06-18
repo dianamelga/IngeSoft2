@@ -8,6 +8,7 @@ package vacuna.service;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -81,6 +82,22 @@ public class UsuariosFacadeREST extends AbstractFacade<Usuarios> {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("/mail/{correo}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Usuarios findCorreo(@PathParam("correo") String correo) {
+        Usuarios u;
+        try {
+            u = (Usuarios) getEntityManager()
+                    .createQuery("SELECT u FROM Usuarios u WHERE u.correo = :correo")
+                    .setParameter("correo", correo).getSingleResult();
+        }
+        catch (NoResultException e) {
+            u = null;
+        }
+        return u;
     }
 
     @Override

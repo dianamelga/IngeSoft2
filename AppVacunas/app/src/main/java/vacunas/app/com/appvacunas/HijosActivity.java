@@ -25,13 +25,17 @@ public class HijosActivity extends AppCompatActivity {
       getSupportFragmentManager().findFragmentById(R.id.hijos_container);
 
 
+      int id = getIntent().getIntExtra(MainActivity.EXTRA_USUARIO_ID,0);
+
     if (fragment == null) {
-      fragment = HijosFragment.newInstance();
+      fragment = HijosFragment.newInstance(id);
 
       getSupportFragmentManager().beginTransaction().add(R.id.hijos_container, fragment).commit();
     }
 
-    //Crea las notificaciones solo la primera vez que corre la aplicacion
+
+
+    /*Crea las notificaciones solo la primera vez que corre la aplicacion
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
     if (!prefs.getBoolean("firstTime", false)) {
@@ -46,6 +50,6 @@ public class HijosActivity extends AppCompatActivity {
   }
 
   private void loadNotificaciones() {
-    new Notificacion(this,"09/04/2017", 1, "Norma", 01);
+    new Notificacion(this,"09/04/2017", 1, "Norma", 01);*/
  }
 }

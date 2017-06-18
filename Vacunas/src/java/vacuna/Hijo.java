@@ -116,8 +116,12 @@ public class Hijo implements Serializable {
     @Size(max = 40)
     @Column(name = "alergia")
     private String alergia;
+   /* @Column(name = "id_padre")
+    private Integer idPadre;*/
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hijo")
     private Collection<VacunasHijos> vacunasHijosCollection;
+  
     @JoinColumn(name = "id_padre", referencedColumnName = "id_padre")
     @ManyToOne(optional = false)
     private Padre idPadre;
@@ -128,7 +132,9 @@ public class Hijo implements Serializable {
     public Hijo(Integer idHijo) {
         this.idHijo = idHijo;
     }
-
+    
+    
+/*
     public Hijo(Integer idHijo, String nombre, String apellido, String lugarNac, Date fechaNac, Character sexo, String nacionalidad, String direccion, String municipio, String barrio) {
         this.idHijo = idHijo;
         this.nombre = nombre;
@@ -141,7 +147,7 @@ public class Hijo implements Serializable {
         this.municipio = municipio;
         this.barrio = barrio;
     }
-
+*/
     public Integer getIdHijo() {
         return idHijo;
     }
@@ -262,7 +268,7 @@ public class Hijo implements Serializable {
         this.alergia = alergia;
     }
 
-    @XmlTransient
+   @XmlTransient
     public Collection<VacunasHijos> getVacunasHijosCollection() {
         return vacunasHijosCollection;
     }
@@ -303,5 +309,6 @@ public class Hijo implements Serializable {
     public String toString() {
         return "vacuna.Hijo[ idHijo=" + idHijo + " ]";
     }
-    
+
+
 }

@@ -82,6 +82,17 @@ public class HijoFacadeREST extends AbstractFacade<Hijo> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    @GET
+    @Path("/hijos/{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Hijo> findCorreo(@PathParam("id") int id) {
+        List<Hijo> l;
+        l = getEntityManager()
+                    .createQuery("SELECT u FROM Hijo u WHERE u.idPadre.idPadre = :id")
+                    .setParameter("id", id).getResultList();
+        return l;
+    }
 
     @Override
     protected EntityManager getEntityManager() {

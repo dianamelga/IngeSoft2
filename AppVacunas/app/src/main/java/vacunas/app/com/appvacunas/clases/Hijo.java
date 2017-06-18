@@ -55,6 +55,13 @@ public class Hijo {
 
   }
 
+  public Hijo(int id, String nombre, String apellido, String fecha_nac) {
+    this.id = id;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.fecha_nac = fecha_nac;
+  }
+
   public Hijo(Cursor cursor) {
     id = cursor.getInt(cursor.getColumnIndex(HijosEntry.ID));
     cedula = cursor.getInt(cursor.getColumnIndex(HijosEntry.CEDULA));

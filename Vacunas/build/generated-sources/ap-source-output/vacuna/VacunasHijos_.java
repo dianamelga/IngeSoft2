@@ -8,7 +8,7 @@ import vacuna.Hijo;
 import vacuna.Vacunas;
 import vacuna.VacunasHijosPK;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-17T16:14:49")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-18T17:27:09")
 @StaticMetamodel(VacunasHijos.class)
 public class VacunasHijos_ { 
 
