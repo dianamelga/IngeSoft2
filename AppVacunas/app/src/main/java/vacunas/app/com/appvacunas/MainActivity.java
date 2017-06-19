@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements
   private ProgressDialog mProgressDialog;
     private Usuario u;
 
-    private final String  URL_SERVICE = "http://diana:8080/Vacunas/webresources/vacuna.usuarios";
+    private final String  URL_SERVICE = "http://localhost:31981/Vacunas/webresources/vacuna.usuarios";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -273,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements
   }
 
     private void confirm() {
+        Log.d("HijosActivity","Consultar().execute()");
         new Consultar().execute();
     }   //consultar si se encuentra en la bd
 
@@ -297,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
       protected void onPreExecute(){
+          Log.d("HijosActivity","onPreExecute()");
           //Alerta en caso de que no se encuentre en la bd
           super.onPreExecute();
           alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -305,24 +307,30 @@ public class MainActivity extends AppCompatActivity implements
 
       @Override
       protected Boolean doInBackground(Void... params) {
+          Log.d("HijosActivity","doInBackground()");
           boolean resul = true;
 
           HttpClient httpClient = new DefaultHttpClient();
 
 
           //servicio rest
+          String param = URL_SERVICE; /*+"/mail/"+correoUsu;*/
+          Log.d("HijosActivity", "param: "+param);
           HttpGet del =
-                  new HttpGet(URL_SERVICE+"/mail/"+correoUsu);
+                  new HttpGet(param);
 
           del.setHeader("content-type", "application/json");
 
           try {
+              Log.d("HijosActivity","httpClient.execute()");
               HttpResponse resp = httpClient.execute(del);
+              Log.d("HijosActivity","EntityUtils.toString");
               String respStr = EntityUtils.toString(resp.getEntity());
 
               //se obitene el Json del usuario
+              Log.d("HijosActivity","obteniendo JSON");
               JSONObject respJSON = new JSONObject(respStr);
-
+              Log.d("HijosActivity", "JSON: "+String.valueOf(respJSON));
               idUsu = respJSON.getInt("id");
               ciUsu = respJSON.getInt("ci");
               nombreUsu = respJSON.getString("nombre");
@@ -339,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements
       }
 
       protected void onPostExecute(Boolean result){
+          Log.d("HijosActivity", "onPostExecute() -result: "+String.valueOf(result));
           if (result) {
               u = new Usuario(idUsu, ciUsu, nombreUsu, correoUsu, idPadreUsu);
               siguiente();

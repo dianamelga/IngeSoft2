@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">AppVacunas</string>
+  <string name="app_name">Agenda Pediatrica</string>
     <string name="server_client_id">280982687583-jgbh77teng80gj9l75e3agskmr61o9uh.apps.googleusercontent.com</string>
   <!--<string name="server_client_id">1025672760758-9qvea3fluo9sae4jngmvfgkt3hmpl3pb.apps.googleusercontent.com</string>-->
   <string name="hint_nombre">Nombre</string>

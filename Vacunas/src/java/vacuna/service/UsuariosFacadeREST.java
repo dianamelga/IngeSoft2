@@ -86,7 +86,7 @@ public class UsuariosFacadeREST extends AbstractFacade<Usuarios> {
     
     @GET
     @Path("/mail/{correo}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Usuarios findCorreo(@PathParam("correo") String correo) {
         Usuarios u;
         try {
