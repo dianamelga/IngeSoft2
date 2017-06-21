@@ -12,7 +12,7 @@ public class HijoContract {
   public static abstract class HijosEntry implements BaseColumns {
     public static final String TABLE_NAME ="hijos";
 
-    public static final String ID = "id";
+    public static final String ID = "_id";
     public static final String CEDULA = "cedula";
     public static final String NOMBRE = "nombre";
     public static final String APELLIDO = "apellido";

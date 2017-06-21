@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="inge2" type="javax.sql.DataSource">#Tue Jun 20 09:19:08 PYT 2017
+jdbcDriver=org.postgresql.Driver
+password=123456
+userName=postgres
+jdbcUrl=jdbc\:postgresql\://localhost\:5432/inge2
+</Resource>
+</resources>

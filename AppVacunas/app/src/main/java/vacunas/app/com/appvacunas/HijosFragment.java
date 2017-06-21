@@ -42,7 +42,8 @@ import java.util.HashSet;
 public class HijosFragment extends Fragment {
 
 
-    private final String URL_SERVICE = "http://diana:8080/Vacunas/webresources/vacuna.vacunashijos";
+    private final String TAG = "HijosFragment";
+    private final String URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/";
   private BDHelper BDHelper;
 
   private ListView mHijosList;
@@ -56,6 +57,7 @@ public class HijosFragment extends Fragment {
   }
 
   public static HijosFragment newInstance(int usuarioId) {
+      Log.d("HijosFragment", "newInstance");
     HijosFragment fragment = new HijosFragment();
     Bundle args = new Bundle();
     args.putInt(MainActivity.EXTRA_USUARIO_ID, usuarioId);
@@ -67,6 +69,7 @@ public class HijosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "onCreate");
         if (getArguments() != null) {
             mUsuarioId = getArguments().getInt(MainActivity.EXTRA_USUARIO_ID);
         }
@@ -79,6 +82,7 @@ public class HijosFragment extends Fragment {
                            Bundle savedInstanceState) {
 
 
+      Log.d(TAG,"onCreateView");
     View root = inflater.inflate(R.layout.fragment_hijos, container, false);
 
     mHijosList = (ListView) root.findViewById(R.id.hijos_list);
@@ -86,11 +90,16 @@ public class HijosFragment extends Fragment {
     mHijosList.setAdapter(mHijosAdapter);
 
 
+      Log.d(TAG, "setOnItemClickListener");
     mHijosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+
+          Log.d(TAG, "nro de item: "+String.valueOf(i));
         Cursor currentItem = (Cursor) mHijosAdapter.getItem(i);
+          Log.d(TAG,"despues de get item");
+          Log.d(TAG,"currentItem.getInt "+String.valueOf(currentItem.getColumnIndex(HijosEntry.ID)) );
         int currentHijoId = currentItem.getInt(
           currentItem.getColumnIndex(HijosEntry.ID));
 
@@ -106,11 +115,13 @@ public class HijosFragment extends Fragment {
     BDHelper = new BDHelper(getActivity());
 */
 
+
+    Log.d(TAG,"loadHijos");
     loadHijos();
 
     //Crea las notificaciones solo la primera vez que corre la aplicacion
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-      Log.d("HijosActivity", "prefs.getBoolean: "+String.valueOf(!prefs.getBoolean("firstTime", false)));
+      Log.d(TAG, "prefs.getBoolean: "+String.valueOf(!prefs.getBoolean("firstTime", false)));
     if (!prefs.getBoolean("firstTime", false)) {
       // <---- run your one time code here
       loadNotificaciones();
@@ -145,6 +156,7 @@ public class HijosFragment extends Fragment {
 
   private void showVacunasScreen(int currentHijoId) {
 
+      Log.d(TAG, "showVacunasScreen, currentHijoId:" + String.valueOf(currentHijoId));
       Intent intent = new Intent(getActivity(), VacunasActivity.class);
     intent.putExtra(HijosActivity.EXTRA_HIJO_ID, currentHijoId);
     startActivity(intent);
@@ -218,15 +230,20 @@ public class HijosFragment extends Fragment {
       }
 
       protected Wrapper doInBackground(Void... params){
+          Log.d(TAG, "doInBackground...");
           boolean resul = true;
 
-          MatrixCursor mc = new MatrixCursor(new String[] {"_id", HijosEntry.NOMBRE, HijosEntry.APELLIDO,
+          hijos = new ArrayList<Hijo>();
+
+          MatrixCursor mc = new MatrixCursor(new String[] {HijosEntry.ID, HijosEntry.NOMBRE, HijosEntry.APELLIDO,
           HijosEntry.FECHA_NAC});
 
           HttpClient httpClient = new DefaultHttpClient();
 
+          Log.d(TAG, URL_SERVICE + mUsuarioId);
+
           HttpGet del =
-                  new HttpGet("url"+ mUsuarioId);
+                  new HttpGet(URL_SERVICE+"com.hijo/padre/"+ mUsuarioId);
 
           del.setHeader("content-type", "application/json");
 
@@ -242,8 +259,12 @@ public class HijosFragment extends Fragment {
                       String nombre = jObject.getString("nombre");
                       String apellido = jObject.getString("apellido");
                       String fecha_nac = jObject.getString("fechaNac");
+
+                      Log.d(TAG, String.valueOf(id)+", "+nombre+", "+apellido+", "+fecha_nac);
                       mc.addRow(new Object[] {id, nombre, apellido, fecha_nac});
+                      Log.d(TAG, "despues de addRow");
                       hijos.add(new Hijo(id, nombre, apellido, fecha_nac));
+                      Log.d(TAG, "despues de addHijo");
                   }
               }else{
                   resul = false;
@@ -276,6 +297,7 @@ public class HijosFragment extends Fragment {
 */
       protected void onPostExecute(Wrapper w) {
 
+          Log.d(TAG,"onPostExecute()");
           if (w.result) {
               if (w.cursor != null && w.cursor.getCount() > 0) {
                   mHijosAdapter.swapCursor(w.cursor);
@@ -307,6 +329,7 @@ public class HijosFragment extends Fragment {
     private class MesesNoAplicados extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void... params){
 
+            Log.d(TAG, "MesesNoAplicados");
             int mes;
             String fecha_apl;
             ArrayList<Integer> meses;
@@ -321,7 +344,7 @@ public class HijosFragment extends Fragment {
                 httpClient = new DefaultHttpClient();
 
                 del =
-                        new HttpGet(URL_SERVICE+"/vacunasnoapl/"+String.valueOf(hijo.getId())+"/0");
+                        new HttpGet(URL_SERVICE+"com.vacunashijos/vacunasnoapl/"+String.valueOf(hijo.getId())+"/0");
 
                 del.setHeader("content-type", "application/json");
 
@@ -332,7 +355,8 @@ public class HijosFragment extends Fragment {
                     if (jArray != null) {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jObject = jArray.getJSONObject(i);
-                            mes = jObject.getInt("mesAplicacion");
+                            JSONObject jsonMes = jObject.getJSONObject("vacunas");
+                            mes = jsonMes.getInt("mesAplicacion");
                             fecha_apl = jObject.getString("fechaApl");
                             if (!meses.contains(mes)){
                                 meses.add(mes);

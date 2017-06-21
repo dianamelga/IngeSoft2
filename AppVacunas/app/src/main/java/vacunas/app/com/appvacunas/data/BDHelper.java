@@ -141,13 +141,13 @@ public class BDHelper extends SQLiteOpenHelper {
 
     //Usuarios Responsables
 
-    insertarUsuario(sqLiteDatabase, new Usuario(1, 3987431, "Cindy",
+    insertarUsuario(sqLiteDatabase, new Usuario(1, "Cindy",
       "cindyortega@gmail.com", 1));
 
-      insertarUsuario(sqLiteDatabase, new Usuario(2, 5218201, "Adriana",
+      insertarUsuario(sqLiteDatabase, new Usuario(2, "Adriana",
       "adrianaarce@gmail.com", 1));
 
-      insertarUsuario(sqLiteDatabase, new Usuario(3, 4923823, "Diana",
+      insertarUsuario(sqLiteDatabase, new Usuario(3,  "Diana",
       "di.melgarejo@gmail.com", 1));
 
 

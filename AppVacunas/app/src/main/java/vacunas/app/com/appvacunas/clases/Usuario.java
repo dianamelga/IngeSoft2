@@ -12,16 +12,15 @@ import vacunas.app.com.appvacunas.data.UsuarioContract.UsuariosEntry;
 //Entidad Usuario Responsable
 public class Usuario {
   private int id;
-  private int ci;
+
   private String nombre;
   private String correo;
   private int id_padre;
 
-  public Usuario(int id, int ci, String nombre,
+  public Usuario(int id, String nombre,
                      String correo, int id_padre) {
 
     this.id = id;
-    this.ci = ci;
     this.nombre = nombre;
     this.correo = correo;
     this.id_padre = id_padre;
@@ -54,13 +53,6 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getCi() {
-        return ci;
-    }
-
-    public void setCi(int ci) {
-        this.ci = ci;
-    }
 
     public String getNombre() {
         return nombre;

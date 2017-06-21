@@ -10,6 +10,7 @@ import vacunas.app.com.appvacunas.R;
 
 public class VacunasActivity extends AppCompatActivity {
 
+  public static final String TAG = "VacunasActivity";
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -22,9 +23,9 @@ public class VacunasActivity extends AppCompatActivity {
 
     int id = getIntent().getIntExtra(HijosActivity.EXTRA_HIJO_ID, 0);
 
-    Log.d("HijosActivity", "id: "+String.valueOf(id));
+    Log.d(TAG, "id: "+String.valueOf(id));
 
-      Log.d("HijosActivity", "fragment is null: "+String.valueOf(fragment == null));
+      Log.d(TAG, "fragment is null: "+String.valueOf(fragment == null));
     if (fragment == null) {
       fragment = VacunasFragment.newInstance(id);
       getSupportFragmentManager().beginTransaction().add(R.id.vacunas_container, fragment).commit();

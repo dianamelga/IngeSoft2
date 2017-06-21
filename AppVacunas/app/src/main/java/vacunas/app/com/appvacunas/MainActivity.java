@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements
   private ProgressDialog mProgressDialog;
     private Usuario u;
 
-    private final String  URL_SERVICE = "http://localhost:31981/Vacunas/webresources/vacuna.usuarios";
+    private final String  URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/com.usuarios/mail/di.melgarejo@gmail.com";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements
     //el id del usuario
     private void siguiente() {
         Intent confint = new Intent(this, HijosActivity.class);
-        confint.putExtra(EXTRA_USUARIO_ID, u.getId());
+        confint.putExtra(EXTRA_USUARIO_ID, u.getId_padre());
         startActivity(confint);
     }
 
@@ -332,11 +332,12 @@ public class MainActivity extends AppCompatActivity implements
               JSONObject respJSON = new JSONObject(respStr);
               Log.d("HijosActivity", "JSON: "+String.valueOf(respJSON));
               idUsu = respJSON.getInt("id");
-              ciUsu = respJSON.getInt("ci");
+
               nombreUsu = respJSON.getString("nombre");
               correoUsu = respJSON.getString("correo");
-              idPadreUsu = respJSON.getInt("id_padre");
+              JSONObject jsonPadre = respJSON.getJSONObject("idPadre");
 
+              idPadreUsu = jsonPadre.getInt("idPadre");
 
           }catch(Exception e){
               Log.e("ServicioRest", "Error!", e);
@@ -349,7 +350,7 @@ public class MainActivity extends AppCompatActivity implements
       protected void onPostExecute(Boolean result){
           Log.d("HijosActivity", "onPostExecute() -result: "+String.valueOf(result));
           if (result) {
-              u = new Usuario(idUsu, ciUsu, nombreUsu, correoUsu, idPadreUsu);
+              u = new Usuario(idUsu, nombreUsu, correoUsu, idPadreUsu);
               siguiente();
               //si no hay error pasa a la siguiente actividad
           }else{

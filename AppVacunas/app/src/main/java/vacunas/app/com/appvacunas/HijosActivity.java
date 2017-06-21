@@ -13,6 +13,7 @@ import vacunas.app.com.appvacunas.clases.Notificacion;
 public class HijosActivity extends AppCompatActivity {
 
   public static final String EXTRA_HIJO_ID = "extra_hijo_id";
+  public static final String TAG = "HijosActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class HijosActivity extends AppCompatActivity {
 
       int id = getIntent().getIntExtra(MainActivity.EXTRA_USUARIO_ID,0);
 
+    Log.d(TAG, "fragment is null: "+String.valueOf(fragment));
     if (fragment == null) {
       fragment = HijosFragment.newInstance(id);
 

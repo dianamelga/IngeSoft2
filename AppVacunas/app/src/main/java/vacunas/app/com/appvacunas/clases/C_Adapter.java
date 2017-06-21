@@ -20,6 +20,8 @@ import vacunas.app.com.appvacunas.data.HijoContract.HijosEntry;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by adriana on 9/4/2017.
  */
@@ -41,14 +43,19 @@ public class C_Adapter extends CursorAdapter{
 
     // Referencias UI.
     TextView nameText = (TextView) view.findViewById(R.id.tv_name);
+     // TextView idHijoText = (TextView) view.findViewById(R.id.tv_idHijo);
 
     final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
     // Get valores..
+      Log.d("HijosActivity","get valores...");
     String name = cursor.getString(cursor.getColumnIndex(HijosEntry.NOMBRE))
       + " " + cursor.getString(cursor.getColumnIndex(HijosEntry.APELLIDO));
+     // Integer idHijo = cursor.getInt(cursor.getColumnIndex(HijosEntry.ID));
+
     String avatarUri = ""; //No tenemos en la bd
 
+    /*  Log.d("HijosActivity","set idx");
           int idx = cursor.getColumnIndex(HijosEntry.SEXO);
           String sexo = cursor.getString(idx);
 
@@ -59,10 +66,11 @@ public class C_Adapter extends CursorAdapter{
           }else{
 
               avatarImage.setImageResource(R.drawable.boy);
-          }
+          }*/
     // Setup.
 
     nameText.setText(name);
+     // idHijoText.setText(String.valueOf(idHijo));
 
 
 
