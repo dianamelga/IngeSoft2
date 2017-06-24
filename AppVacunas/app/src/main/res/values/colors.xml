@@ -2,7 +2,8 @@
 <resources>
   <color name="colorPrimary">#FFC107</color>
   <color name="colorPrimaryDark">#FFA000</color>
-  <color name="colorAccent">#FF5722</color>
+  <color name="colorAccent">#FFEB3B</color>
+  <color name="lightPrimaryColor">#FFEB3B</color>
   <color name="blue_grey_500">#607D8B</color>
   <color name="blue_grey_600">#546E7A</color>
   <color name="blue_grey_700">#455A64</color>

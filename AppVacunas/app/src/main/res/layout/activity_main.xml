@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/sign_out"
-          android:background="@color/color_continue"
+          android:background="@color/colorAccent"
         android:theme="@style/ThemeOverlay.MyDarkButton" />
 
 
@@ -121,9 +121,9 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="@string/nextbutton_text"
-          android:visibility="invisible"
-          tools:visibility="invisible"
-          android:background="@color/colorAccent"
+          android:visibility="visible"
+          tools:visibility="visible"
+          android:background="@color/colorPrimary"
           android:theme="@style/ThemeOverlay.MyDarkButton" />
 
       <!--Button

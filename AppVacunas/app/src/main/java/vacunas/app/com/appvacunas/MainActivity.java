@@ -29,10 +29,14 @@ import com.google.android.gms.common.api.Status;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.apache.http.client.*;
+
+import java.net.URL;
 
 import vacunas.app.com.appvacunas.clases.Usuario;
 
@@ -48,8 +52,9 @@ public class MainActivity extends AppCompatActivity implements
   private TextView mStatusTextView;
   private ProgressDialog mProgressDialog;
     private Usuario u;
+    private String correoUsu;
 
-    private final String  URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/com.usuarios/mail/di.melgarejo@gmail.com";
+    private final String  URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/com.usuarios";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements
       // Signed in successfully, show authenticated UI.
       GoogleSignInAccount acct = result.getSignInAccount();
       mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+        correoUsu = acct.getEmail();
       updateUI(true);
     } else {
       // Signed out, show unauthenticated UI.
@@ -292,7 +298,6 @@ public class MainActivity extends AppCompatActivity implements
       private int idUsu;
       private int ciUsu;
       private String nombreUsu;
-      private String correoUsu;
       private int idPadreUsu;
       AlertDialog alertDialog;
 
@@ -314,16 +319,32 @@ public class MainActivity extends AppCompatActivity implements
 
 
           //servicio rest
-          String param = URL_SERVICE; /*+"/mail/"+correoUsu;*/
+          String param = URL_SERVICE+"/mail/"+correoUsu;
           Log.d("HijosActivity", "param: "+param);
+
           HttpGet del =
                   new HttpGet(param);
 
           del.setHeader("content-type", "application/json");
 
+          /**/
+          HttpPost post = new HttpPost(URL_SERVICE);
+          post.setHeader("content-type", "application/json");
+
+
+/**/
           try {
+              /**/
+              JSONObject dato = new JSONObject();
+              dato.put("correo", correoUsu);
+
+              StringEntity entity = new StringEntity(dato.toString());
+              post.setEntity(entity);
+              /**/
+
+
               Log.d("HijosActivity","httpClient.execute()");
-              HttpResponse resp = httpClient.execute(del);
+              HttpResponse resp = httpClient.execute(post);/*probando*/
               Log.d("HijosActivity","EntityUtils.toString");
               String respStr = EntityUtils.toString(resp.getEntity());
 
