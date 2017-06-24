@@ -86,10 +86,10 @@ public class VacunasFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-      Log.d("HijosActivity", "onCreate de Vacunas Fragment");
+      Log.d(TAG, "onCreate de Vacunas Fragment");
     if (getArguments() != null) {
       mHijoId = getArguments().getInt(ARG_HIJO_ID);
-        Log.d("HijosActivity", "mHijoId: "+String.valueOf(mHijoId));
+        Log.d(TAG, "mHijoId: "+String.valueOf(mHijoId));
     }
 
     setHasOptionsMenu(true);
@@ -97,10 +97,11 @@ public class VacunasFragment extends Fragment {
   }
 
   public boolean onOptionsItemSelected(MenuItem item) {
-    Log.d("HijosActivity", "onOptionsItemSelected de VacunasFragment");
-    Log.d("HijosActivity", "item.getItenId(): "+String.valueOf(item.getItemId()));
+    Log.d(TAG, "onOptionsItemSelected de VacunasFragment");
+    Log.d(TAG, "item.getItenId(): "+String.valueOf(item.getItemId()));
     switch (item.getItemId()) {
       case R.id.action_info:
+          Log.d(TAG, "showHijosScreen: "+String.valueOf(mHijoId));
         showHijosScreen(mHijoId);
         break;
     }
@@ -124,6 +125,7 @@ public class VacunasFragment extends Fragment {
   }
 
   private void preparar(){
+      Log.d(TAG, "CargarVacunasTask()");
       new CargarVacunasTask().execute();
   }
 
@@ -131,6 +133,7 @@ public class VacunasFragment extends Fragment {
 
       @Override
       protected Boolean doInBackground(Object... params) {
+          Log.d(TAG, "doInBackGround...");
           HttpClient httpClient = new DefaultHttpClient();
           HttpResponse resp;
           String respStr;
@@ -154,20 +157,28 @@ public class VacunasFragment extends Fragment {
               resp = httpClient.execute(del);
               respStr = EntityUtils.toString(resp.getEntity());
 
+              Log.d(TAG, "recorrer(0): "+String.valueOf(recorrer(respStr, 0)));
               listDataChild.put(listDataHeader.get(0), recorrer(respStr, 0));
 
+              Log.d(TAG, "recorrer(2): "+String.valueOf(recorrer(respStr, 2)));
               listDataChild.put(listDataHeader.get(1), recorrer(respStr, 2));
 
+              Log.d(TAG, "recorrer(4): "+String.valueOf(recorrer(respStr, 4)));
               listDataChild.put(listDataHeader.get(2), recorrer(respStr, 4));
 
+              Log.d(TAG, "recorrer(6): "+String.valueOf(recorrer(respStr, 6)));
               listDataChild.put(listDataHeader.get(3), recorrer(respStr, 6));
 
+              Log.d(TAG, "recorrer(12): "+String.valueOf(recorrer(respStr, 12)));
               listDataChild.put(listDataHeader.get(4), recorrer(respStr, 12));
 
+              Log.d(TAG, "recorrer(15): "+String.valueOf(recorrer(respStr, 15)));
               listDataChild.put(listDataHeader.get(5), recorrer(respStr, 15));
 
+              Log.d(TAG, "recorrer(18): "+String.valueOf(recorrer(respStr, 18)));
               listDataChild.put(listDataHeader.get(6), recorrer(respStr, 18));
 
+              Log.d(TAG, "recorrer(48): "+String.valueOf(recorrer(respStr, 48)));
               listDataChild.put(listDataHeader.get(7), recorrer(respStr, 48));
           }catch(Exception e){
               Log.d(TAG, "Error: "+e.getMessage());
@@ -187,59 +198,69 @@ public class VacunasFragment extends Fragment {
       ArrayList<VacunaHijo> mArrayList = new ArrayList<VacunaHijo>();
       int idHijo, id, nro_dosis, mes, aplicado, dias_atraso;
       String nombre, edad, fecha_apl, lote, responsable, fecha;
+      Log.d(TAG, "JSON: "+json);
       try {
           jArray = new JSONArray(json);
           if (jArray != null){
               for (int i=0; i < jArray.length(); i++){
                   jObject = jArray.getJSONObject(i);
-                  mes = jObject.getInt("mesAplicacion");
+                  mes = jObject.getJSONObject("vacunas").getInt("mesAplicacion");
 
                   if (mes == month){
                       idHijo = jObject.getJSONObject("vacunasHijosPK").getInt("idHijo");
                       id = jObject.getJSONObject("vacunasHijosPK").getInt("idVacuna");
-                      nro_dosis = jObject.getJSONObject("vacunasHijosPK").getInt("nro_dosis");
+                      nro_dosis = jObject.getJSONObject("vacunas").getJSONObject("vacunasPK").getInt("nroDosis");
                       nombre = jObject.getJSONObject("vacunas").getString("nombreVacuna");
-                      dias_atraso = jObject.getJSONObject("vacunasHijos").getInt("diasAtrasoApl");
+                      dias_atraso = jObject.getInt("diasAtrasoApl");
 
+                      Log.d(TAG,"edad: "+String.valueOf(jObject.isNull("edad")));
                       if (jObject.isNull("edad")) {
-                          edad = "";
+                          edad = "0";
                       }else {
                           edad = jObject.getString("edad");
                       }
-                      nro_dosis = jObject.getInt("nroDosis");
+                      //nro_dosis = jObject.getJSONObject("vacunas").getJSONObject("vacunasPK").getInt("nroDosis");
 
-                      if (jObject.isNull("fecha")) {
+                      Log.d(TAG,"fechaProgramada: "+String.valueOf(jObject.isNull("fechaProgramada")));
+                      if (jObject.isNull("fechaProgramada")) {
                           fecha = " ";
                       } else {
-                          fecha = jObject.getString("fecha");
+                          fecha = jObject.getString("fechaProgramada");
                       }
 
+                      Log.d(TAG,"lote: "+String.valueOf(jObject.isNull("lote")));
                       if (jObject.isNull("lote")) {
                           lote = " ";
                       } else {
                           lote = jObject.getString("lote");
                       }
 
+                      Log.d(TAG,"responsable: "+String.valueOf(jObject.isNull("responsable")));
                       if (jObject.isNull("responsable")) {
                           responsable = " ";
                       } else {
                           responsable = jObject.getString("responsable");
                       }
 
+                      Log.d(TAG,"aplicado: "+String.valueOf(jObject.getInt("aplicado")));
                       aplicado = jObject.getInt("aplicado");
-                      fecha_apl = jObject.getString("fechaApl");
+                      Log.d(TAG, "fechaAplicacion: "+String.valueOf(jObject.getString("fechaAplicacion")));
+                      fecha_apl = jObject.getString("fechaAplicacion");
 
+                      Log.d(TAG, "new VacunaHijo");
                       VacunaHijo v = new VacunaHijo(id, nro_dosis, idHijo, nombre,
                               fecha, lote, responsable, aplicado,
                               fecha_apl, dias_atraso, mes, Integer.parseInt(edad));
 
+                      Log.d(TAG, "mArrayList.add()");
                       mArrayList.add(v);
                   }
               }
           }
       }catch (Exception e){
-          Log.d(TAG, e.getMessage());
+          Log.d(TAG, "Excepcion: "+e.getMessage());
       }
+      Log.d(TAG, String.valueOf(mArrayList));
       return mArrayList;
   }
 

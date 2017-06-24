@@ -27,6 +27,7 @@ import org.w3c.dom.Text;
  */
 
 public class C_Adapter extends CursorAdapter{
+  public static final String TAG = "C_Adapter";
   public C_Adapter(Context context, Cursor c) {
     super(context, c, 0);
   }
@@ -48,7 +49,7 @@ public class C_Adapter extends CursorAdapter{
     final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
     // Get valores..
-      Log.d("HijosActivity","get valores...");
+      Log.d(TAG,"get valores...");
     String name = cursor.getString(cursor.getColumnIndex(HijosEntry.NOMBRE))
       + " " + cursor.getString(cursor.getColumnIndex(HijosEntry.APELLIDO));
      // Integer idHijo = cursor.getInt(cursor.getColumnIndex(HijosEntry.ID));

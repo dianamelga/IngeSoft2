@@ -3,10 +3,12 @@ package vacunas.app.com.appvacunas;
 //import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,17 @@ import android.support.design.widget.CollapsingToolbarLayout;
 
 import vacunas.app.com.appvacunas.R;
 import com.bumptech.glide.Glide;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
 import vacunas.app.com.appvacunas.clases.Hijo;
 import vacunas.app.com.appvacunas.data.BDHelper;
+import vacunas.app.com.appvacunas.data.HijoContract;
 
 
 /**
@@ -26,6 +37,8 @@ import vacunas.app.com.appvacunas.data.BDHelper;
  */
 
 public class DetalleHijosFragment extends Fragment {
+    private static final String URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/";
+    private static final String TAG = "DetalleHijosFragment";
   private static final String ARG_HIJO_ID = "hijoId";
   private int mHijoId;
 
@@ -50,6 +63,7 @@ public class DetalleHijosFragment extends Fragment {
   }
 
   public static DetalleHijosFragment newInstance(int hijoId) {
+      Log.d(TAG,"newInstance. hijoId: "+String.valueOf(hijoId));
     DetalleHijosFragment fragment = new DetalleHijosFragment();
     Bundle args = new Bundle();
     args.putInt(ARG_HIJO_ID, hijoId);
@@ -61,6 +75,7 @@ public class DetalleHijosFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+      Log.d(TAG, "getArguments(): "+String.valueOf(getArguments()));
     if (getArguments() != null) {
       mHijoId = getArguments().getInt(ARG_HIJO_ID);
     }
@@ -70,6 +85,7 @@ public class DetalleHijosFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+      Log.d(TAG, "onCreateView");
     View root = inflater.inflate(R.layout.fragment_hijos_detalle, container, false);
     mCollapsingView = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
     mAvatar = (ImageView) getActivity().findViewById(R.id.iv_avatar);
@@ -127,7 +143,58 @@ public class DetalleHijosFragment extends Fragment {
 
     @Override
     protected Cursor doInBackground(Void... voids) {
-      return BDHelper.getHijoById(String.valueOf(mHijoId));
+      //return BDHelper.getHijoById(String.valueOf(mHijoId));
+
+        MatrixCursor mc = new MatrixCursor(new String[] {"_id",
+                HijoContract.HijosEntry.NOMBRE,
+                HijoContract.HijosEntry.APELLIDO,
+                HijoContract.HijosEntry.CEDULA,
+                HijoContract.HijosEntry.FECHA_NAC,
+                HijoContract.HijosEntry.SEXO,
+                HijoContract.HijosEntry.LUGAR_NAC,
+                HijoContract.HijosEntry.NACIONALIDAD,
+                HijoContract.HijosEntry.DEPARTAMENTO,
+                HijoContract.HijosEntry.MUNICIPIO,
+                HijoContract.HijosEntry.BARRIO,
+                HijoContract.HijosEntry.DIRECCION,
+                HijoContract.HijosEntry.ID_PADRE});
+
+        HttpClient httpClient = new DefaultHttpClient();
+
+        HttpGet del =
+                new HttpGet(URL_SERVICE +"com.hijo/"+ mHijoId );
+        del.setHeader("content-type", "application/json");
+
+        try {
+            HttpResponse resp = httpClient.execute(del);
+            String respStr = EntityUtils.toString(resp.getEntity());
+            String nombre, apellido, fecha_nac, sexo, lugar_nac, nacionalidad, departamento,
+                    municipio, barrio, direccion;
+            int id, ci, id_usuario;
+
+            JSONObject jObject = new JSONObject(respStr);
+            id = jObject.getInt("idHijo");
+            nombre = jObject.getString("nombre");
+            apellido = jObject.getString("apellido");
+            ci = jObject.getInt("ci");
+            fecha_nac = jObject.getString("fechaNac");
+            sexo = jObject.getString("sexo");
+            lugar_nac = jObject.getString("lugarNac");
+            nacionalidad = jObject.getString("nacionalidad");
+            departamento = jObject.getString("departamento");
+            municipio = jObject.getString("municipio");
+            barrio = jObject.getString("barrio");
+            direccion = jObject.getString("direccion");
+            id_usuario = jObject.getJSONObject("idPadre").getInt("idPadre");
+            mc.addRow(new Object[] {id, nombre, apellido, ci, fecha_nac, sexo, lugar_nac,
+            nacionalidad, departamento, municipio, barrio, direccion, id_usuario});
+
+        }catch (Exception e){
+
+            Log.d(TAG, "ServicioRest: "+e.getMessage());
+        }
+
+        return mc;
     }
 
     @Override

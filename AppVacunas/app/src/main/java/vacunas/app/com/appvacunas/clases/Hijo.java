@@ -3,6 +3,7 @@ package vacunas.app.com.appvacunas.clases;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import vacunas.app.com.appvacunas.data.HijoContract;
 import vacunas.app.com.appvacunas.data.HijoContract.HijosEntry;
 /**
  * Created by adriana on 9/4/2017.
@@ -61,7 +62,20 @@ public class Hijo {
     this.apellido = apellido;
     this.fecha_nac = fecha_nac;
   }
-
+/*
+  HijoContract.HijosEntry.NOMBRE,
+  HijoContract.HijosEntry.APELLIDO,
+  HijoContract.HijosEntry.CEDULA,
+  HijoContract.HijosEntry.FECHA_NAC,
+  HijoContract.HijosEntry.SEXO,
+  HijoContract.HijosEntry.LUGAR_NAC,
+  HijoContract.HijosEntry.NACIONALIDAD,
+  HijoContract.HijosEntry.DEPARTAMENTO,
+  HijoContract.HijosEntry.MUNICIPIO,
+  HijoContract.HijosEntry.BARRIO,
+  HijoContract.HijosEntry.DIRECCION,
+  HijoContract.HijosEntry.ID_PADRE});
+*/
   public Hijo(Cursor cursor) {
     id = cursor.getInt(cursor.getColumnIndex(HijosEntry.ID));
     cedula = cursor.getInt(cursor.getColumnIndex(HijosEntry.CEDULA));
@@ -76,10 +90,10 @@ public class Hijo {
     municipio = cursor.getString(cursor.getColumnIndex(HijosEntry.MUNICIPIO));
     id_padre = cursor.getInt(cursor.getColumnIndex(HijosEntry.ID_PADRE));
     barrio = cursor.getString(cursor.getColumnIndex(HijosEntry.BARRIO));
-    referencia = cursor.getString(cursor.getColumnIndex(HijosEntry.REFERENCIA));
+   //referencia = cursor.getString(cursor.getColumnIndex(HijosEntry.REFERENCIA));
 
-    telefono = cursor.getString(cursor.getColumnIndex(HijosEntry.TELEFONO));
-    seguro = cursor.getString(cursor.getColumnIndex(HijosEntry.SEGURO));
+    //telefono = cursor.getString(cursor.getColumnIndex(HijosEntry.TELEFONO));
+    //seguro = cursor.getString(cursor.getColumnIndex(HijosEntry.SEGURO));
 
   }
 
@@ -98,9 +112,9 @@ public class Hijo {
     values.put(HijosEntry.MUNICIPIO, municipio);
     values.put(HijosEntry.ID_PADRE, id_padre);
     values.put(HijosEntry.BARRIO, barrio);
-    values.put(HijosEntry.REFERENCIA, referencia);
-    values.put(HijosEntry.TELEFONO, telefono);
-    values.put(HijosEntry.SEGURO, seguro);
+    //values.put(HijosEntry.REFERENCIA, referencia);
+    //values.put(HijosEntry.TELEFONO, telefono);
+    //values.put(HijosEntry.SEGURO, seguro);
 
     return values;
   }

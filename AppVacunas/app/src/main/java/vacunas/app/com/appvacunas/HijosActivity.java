@@ -17,6 +17,7 @@ public class HijosActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    Log.d(TAG, "onCreate");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_hijos);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
