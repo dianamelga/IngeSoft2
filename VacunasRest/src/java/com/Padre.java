@@ -65,9 +65,9 @@ public class Padre implements Serializable {
     private int cedula;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 19)
     @Column(name = "fecha_nac")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNac;
+    private String fechaNac;
     @Basic(optional = false)
     @NotNull
     @Column(name = "sexo")
@@ -94,7 +94,7 @@ public class Padre implements Serializable {
         this.idPadre = idPadre;
     }
 
-    public Padre(Integer idPadre, String nombre, String apellido, int cedula, Date fechaNac, String sexo, String nacionalidad, String municipio) {
+    public Padre(Integer idPadre, String nombre, String apellido, int cedula, String fechaNac, String sexo, String nacionalidad, String municipio) {
         this.idPadre = idPadre;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -137,11 +137,11 @@ public class Padre implements Serializable {
         this.cedula = cedula;
     }
 
-    public Date getFechaNac() {
+    public String getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 

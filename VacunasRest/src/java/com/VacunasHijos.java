@@ -48,9 +48,9 @@ public class VacunasHijos implements Serializable {
     protected VacunasHijosPK vacunasHijosPK;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 19)
     @Column(name = "fecha_programada")
-    @Temporal(TemporalType.DATE)
-    private Date fechaProgramada;
+    private String fechaProgramada;
     @Column(name = "lote")
     private String lote;
     @Basic(optional = false)
@@ -62,9 +62,9 @@ public class VacunasHijos implements Serializable {
     @NotNull
     @Column(name = "aplicado")
     private int aplicado;
+    @Size(min = 1, max = 19)
     @Column(name = "fecha_aplicacion")
-    @Temporal(TemporalType.DATE)
-    private Date fechaAplicacion;
+    private String fechaAplicacion;
     @Column(name = "dias_atraso_apl")
     private Integer diasAtrasoApl;
     @JoinColumn(name = "id_hijo", referencedColumnName = "id_hijo", insertable = false, updatable = false)
@@ -83,7 +83,7 @@ public class VacunasHijos implements Serializable {
         this.vacunasHijosPK = vacunasHijosPK;
     }
 
-    public VacunasHijos(VacunasHijosPK vacunasHijosPK, Date fechaProgramada, String responsable, int aplicado) {
+    public VacunasHijos(VacunasHijosPK vacunasHijosPK, String fechaProgramada, String responsable, int aplicado) {
         this.vacunasHijosPK = vacunasHijosPK;
         this.fechaProgramada = fechaProgramada;
         this.responsable = responsable;
@@ -102,11 +102,11 @@ public class VacunasHijos implements Serializable {
         this.vacunasHijosPK = vacunasHijosPK;
     }
 
-    public Date getFechaProgramada() {
+    public String getFechaProgramada() {
         return fechaProgramada;
     }
 
-    public void setFechaProgramada(Date fechaProgramada) {
+    public void setFechaProgramada(String fechaProgramada) {
         this.fechaProgramada = fechaProgramada;
     }
 
@@ -134,11 +134,11 @@ public class VacunasHijos implements Serializable {
         this.aplicado = aplicado;
     }
 
-    public Date getFechaAplicacion() {
+    public String getFechaAplicacion() {
         return fechaAplicacion;
     }
 
-    public void setFechaAplicacion(Date fechaAplicacion) {
+    public void setFechaAplicacion(String fechaAplicacion) {
         this.fechaAplicacion = fechaAplicacion;
     }
 

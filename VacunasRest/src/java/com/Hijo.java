@@ -78,8 +78,7 @@ public class Hijo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_nac")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNac;
+    private String fechaNac;
     @Basic(optional = false)
     @NotNull
     @Column(name = "sexo")
@@ -116,6 +115,9 @@ public class Hijo implements Serializable {
     @Size(max = 40)
     @Column(name = "alergia")
     private String alergia;
+    @Size(max = 40)
+    @Column(name = "departamento")
+    private String departamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hijo")
     private Collection<VacunasHijos> vacunasHijosCollection;
     @JoinColumn(name = "id_padre", referencedColumnName = "id_padre")
@@ -129,7 +131,8 @@ public class Hijo implements Serializable {
         this.idHijo = idHijo;
     }
 
-    public Hijo(Integer idHijo, String nombre, String apellido, String lugarNac, Date fechaNac, String sexo, String nacionalidad, String direccion, String municipio, String barrio) {
+    public Hijo(Integer idHijo, String nombre, String apellido, String lugarNac, String fechaNac, String sexo, String nacionalidad, String direccion, String municipio, String barrio,
+            String departamento) {
         this.idHijo = idHijo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -140,6 +143,7 @@ public class Hijo implements Serializable {
         this.direccion = direccion;
         this.municipio = municipio;
         this.barrio = barrio;
+        this.departamento = departamento;
     }
 
     public Integer getIdHijo() {
@@ -182,11 +186,11 @@ public class Hijo implements Serializable {
         this.lugarNac = lugarNac;
     }
 
-    public Date getFechaNac() {
+    public String getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 
@@ -260,6 +264,14 @@ public class Hijo implements Serializable {
 
     public void setAlergia(String alergia) {
         this.alergia = alergia;
+    }
+    
+    public String getDepartamento() {
+        return departamento;
+    }
+    
+    public void setDepartamento(String departamento){
+        this.departamento = departamento;
     }
 
     @XmlTransient

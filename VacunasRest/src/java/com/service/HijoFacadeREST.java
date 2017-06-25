@@ -43,6 +43,8 @@ public class HijoFacadeREST extends AbstractFacade<Hijo> {
         super.create(entity);
     }
 
+    // metodo a manopla
+    
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
@@ -97,6 +99,7 @@ public class HijoFacadeREST extends AbstractFacade<Hijo> {
         
         return l;
     }
+   
 
     @Override
     protected EntityManager getEntityManager() {
