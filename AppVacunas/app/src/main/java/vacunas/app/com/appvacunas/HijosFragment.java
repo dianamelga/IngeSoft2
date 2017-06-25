@@ -122,7 +122,7 @@ public class HijosFragment extends Fragment {
     //Crea las notificaciones solo la primera vez que corre la aplicacion
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
       Log.d(TAG, "prefs.getBoolean: "+String.valueOf(!prefs.getBoolean("firstTime", false)));
-    if (!prefs.getBoolean("firstTime", false)) {
+    //if (!prefs.getBoolean("firstTime", false)) {
       // <---- run your one time code here
       loadNotificaciones();
 
@@ -130,7 +130,7 @@ public class HijosFragment extends Fragment {
       SharedPreferences.Editor editor = prefs.edit();
       editor.putBoolean("firstTime", true);
       editor.commit();
-    }
+   // }
 
     return root;
   }
@@ -357,7 +357,7 @@ public class HijosFragment extends Fragment {
                             JSONObject jObject = jArray.getJSONObject(i);
                             JSONObject jsonMes = jObject.getJSONObject("vacunas");
                             mes = jsonMes.getInt("mesAplicacion");
-                            fecha_apl = jObject.getString("fechaApl");
+                            fecha_apl = jObject.getString("fechaAplicacion");
                             if (!meses.contains(mes)){
                                 meses.add(mes);
                                 fechas.add(fecha_apl);
@@ -365,10 +365,11 @@ public class HijosFragment extends Fragment {
                         }
                     }
                 }catch(Exception e){
-                    Log.e("ServicioRest", "Error!", e);
+                    Log.d(TAG, "ServicioRest: "+ e.getMessage());
                 }
 
                 for (int i = 0 ; i < meses.size() ; i++) {
+                    Log.d(TAG, "New Notificacion");
                     new Notificacion(getActivity(),
                             util.calcularNotificacion(fechas.get(i)),
                             hijo.getId(),

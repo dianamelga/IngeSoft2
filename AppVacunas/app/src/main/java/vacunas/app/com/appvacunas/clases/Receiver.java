@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,11 @@ import vacunas.app.com.appvacunas.Calculador;
 
 public class Receiver extends BroadcastReceiver{
 
+  public static final String TAG = "Receiver";
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    Log.d(TAG, "onReceive");
     int id = intent.getIntExtra(HijosActivity.EXTRA_HIJO_ID, 1);
     int mes = intent.getIntExtra("mes", 0);
     String nombre = intent.getStringExtra("nombre");
@@ -65,18 +68,22 @@ public class Receiver extends BroadcastReceiver{
 
       NotificationCompat.Builder mBuilder =
               new NotificationCompat.Builder(context)
-                      .setSmallIcon(R.drawable.ic_notifications)
+                      .setSmallIcon(R.drawable.vacuna)
                       .setContentTitle(nombre)
                       .setContentText("Vacuna pendiente. " +  texto);
+
       Intent resultIntent = new Intent(context, VacunasActivity.class);
       resultIntent.putExtra(HijosActivity.EXTRA_HIJO_ID, id);
       resultIntent.setAction(nombre+String.valueOf(mes));
+
       TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
       stackBuilder.addParentStack(VacunasActivity.class);
       stackBuilder.addNextIntent(resultIntent);
+
       int random = (int)System.currentTimeMillis();
       PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(random, PendingIntent.FLAG_UPDATE_CURRENT);
       mBuilder.setContentIntent(resultPendingIntent);
+
       NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
       mBuilder.setAutoCancel(true);
       mNotificationManager.notify(random, mBuilder.build());

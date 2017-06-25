@@ -1,5 +1,7 @@
 package vacunas.app.com.appvacunas;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,6 +13,7 @@ import java.util.Date;
 
 public class Calculador {
 
+  public static final String TAG = "Calculador";
   public Calculador(){
 
   }
@@ -80,6 +83,7 @@ public class Calculador {
     }
     Date fecha = c.getTime();
     Date hoy = new Date();
+    Log.d(TAG, "fecha.before(hoy): "+String.valueOf(fecha.before(hoy)));
     return fecha.before(hoy);
   }
 }

@@ -7,4 +7,5 @@
   <dimen name="g_top_margin">35dp</dimen>
     <dimen name="height_sing_continue">80dp</dimen>
   <dimen name="marginTop_title">20dp</dimen>
+    <dimen name="size_text">12sp</dimen>
 </resources>

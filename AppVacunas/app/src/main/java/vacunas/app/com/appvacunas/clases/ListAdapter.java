@@ -66,10 +66,14 @@ public class ListAdapter extends BaseExpandableListAdapter {
     txtListChild = (TextView) convertView.findViewById(R.id.tv_dosis);
     txtListChild.setText("Dosis: " + String.valueOf(vacunaHijo.getNro_dosis()));
 
-    //Fecha
+    //Fecha Programada
 
     txtListChild = (TextView) convertView.findViewById(R.id.tv_fecha);
-    txtListChild.setText("Fecha: " + vacunaHijo.getFecha_programada());
+    txtListChild.setText("Fecha Prog: " + vacunaHijo.getFecha_programada());
+
+    //Fecha aplicacion
+    txtListChild = (TextView) convertView.findViewById(R.id.tv_fechaApl);
+    txtListChild.setText("Fecha Aplic: "+vacunaHijo.getFecha_aplicacion());
 
     //Edad
     txtListChild = (TextView) convertView.findViewById(R.id.tv_edad);
@@ -89,7 +93,7 @@ public class ListAdapter extends BaseExpandableListAdapter {
     if(vacunaHijo.getAplicado() == 1) {
       imgListChild.setImageResource(R.drawable.check_ok);
     }
-    else if (calc.vencido(vacunaHijo.getFecha_aplicacion(), vacunaHijo.getMes_aplicacion())){
+    else if (calc.vencido(vacunaHijo.getFecha_programada(), vacunaHijo.getMes_aplicacion())){
 
       imgListChild.setImageResource(R.drawable.no_check);
 
