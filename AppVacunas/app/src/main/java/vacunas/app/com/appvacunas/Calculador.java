@@ -16,7 +16,7 @@ public class Calculador {
   }
 
   public String calcularFecha(String dt, int meses) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Calendar c = Calendar.getInstance();
     try {
       c.setTime(sdf.parse(dt));
@@ -29,7 +29,7 @@ public class Calculador {
   }
 
   public boolean enTiempo(String dt) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Date fecha = new Date();
     try {
       fecha = sdf.parse(dt);
@@ -41,7 +41,7 @@ public class Calculador {
   }
 
   public String calcularNotificacion(String dt) {
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Calendar c = Calendar.getInstance();
     try {
       c.setTime(sdf.parse(dt));
@@ -55,7 +55,7 @@ public class Calculador {
   }
 
   public boolean vencido(String dt, int meses){
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Calendar c = Calendar.getInstance();
     try {
       c.setTime(sdf.parse(dt));

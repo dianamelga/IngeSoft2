@@ -37,7 +37,7 @@ import vacunas.app.com.appvacunas.data.HijoContract;
  */
 
 public class DetalleHijosFragment extends Fragment {
-    private static final String URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/";
+    private static final String URL_SERVICE = "http://192.168.0.9:8080/VacunasRest/webresources/";
     private static final String TAG = "DetalleHijosFragment";
   private static final String ARG_HIJO_ID = "hijoId";
   private int mHijoId;

@@ -29,7 +29,7 @@
       android:layout_width="70dp"
       android:layout_height="70dp"
       android:scaleType="center"
-      app:srcCompat="@drawable/no_yet_check"
+      app:srcCompat="@drawable/not_yet"
       android:layout_alignParentTop="true"
       android:layout_alignParentStart="true"
       android:layout_alignParentLeft="true" />

@@ -39,7 +39,7 @@ import vacunas.app.com.appvacunas.data.BDHelper;
 
 public class VacunasFragment extends Fragment {
   public static final String TAG = "VacunasFragment";
-    public static final String URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/";
+    public static final String URL_SERVICE = "http://192.168.0.9:8080/VacunasRest/webresources/";
   private static final String ARG_HIJO_ID = "hijoId";
   private int mHijoId;
 

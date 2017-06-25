@@ -94,12 +94,8 @@ public class ListAdapter extends BaseExpandableListAdapter {
       imgListChild.setImageResource(R.drawable.no_check);
 
     }
-    // imgListChild.setImageResource(R.drawable.no_check);}
-    else if (calc.enTiempo(vacunaHijo.getFecha_aplicacion())) {
-      imgListChild.setImageResource(R.drawable.no_yet_orange);
-    }
     else {
-      imgListChild.setImageResource(R.drawable.no_yet_check);
+      imgListChild.setImageResource(R.drawable.not_yet);
     }
     return convertView;
   }

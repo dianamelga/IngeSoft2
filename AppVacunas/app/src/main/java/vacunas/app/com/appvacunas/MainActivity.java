@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements
     private Usuario u;
     private String correoUsu;
 
-    private final String  URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/com.usuarios";
+    private final String  URL_SERVICE = "http://192.168.0.9:8080/VacunasRest/webresources/com.usuarios";
   /**
    * ATTENTION: This was auto-generated to implement the App Indexing API.
    * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -327,24 +327,24 @@ public class MainActivity extends AppCompatActivity implements
 
           del.setHeader("content-type", "application/json");
 
-          /**/
+          /*
           HttpPost post = new HttpPost(URL_SERVICE);
           post.setHeader("content-type", "application/json");
 
 
-/**/
+**/
           try {
-              /**/
+              /**
               JSONObject dato = new JSONObject();
               dato.put("correo", correoUsu);
 
               StringEntity entity = new StringEntity(dato.toString());
               post.setEntity(entity);
-              /**/
+              **/
 
 
               Log.d("HijosActivity","httpClient.execute()");
-              HttpResponse resp = httpClient.execute(post);/*probando*/
+              HttpResponse resp = httpClient.execute(del);
               Log.d("HijosActivity","EntityUtils.toString");
               String respStr = EntityUtils.toString(resp.getEntity());
 

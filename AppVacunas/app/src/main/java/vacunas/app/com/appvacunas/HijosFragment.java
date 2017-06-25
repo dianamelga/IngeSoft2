@@ -43,7 +43,7 @@ public class HijosFragment extends Fragment {
 
 
     private final String TAG = "HijosFragment";
-    private final String URL_SERVICE = "http://192.168.43.192:8080/VacunasRest/webresources/";
+    private final String URL_SERVICE = "http://192.168.0.9:8080/VacunasRest/webresources/";
   private BDHelper BDHelper;
 
   private ListView mHijosList;
